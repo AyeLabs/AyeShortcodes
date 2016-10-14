@@ -9,5 +9,8 @@
 	License: GPL
 	Text domain: ayeshort
 */
-require_once 'includes/class.AyeShortcodes.php';
-new \Aye\Shortcodes\AyeShortcodes();
+require_once plugin_dir_path( __FILE__ ) . 'includes/class.AyeShortcodes.php';
+$aye_shortcodes = new \Aye\Shortcodes\AyeShortcodes();
+
+register_activation_hook( __FILE__, array( '\Aye\Shortcodes\AyeShortcodes()', 'activationHook' ) );
+register_deactivation_hook( __FILE__, array( '\Aye\Shortcodes\AyeShortcodes()', 'deactivationHook' ) );

@@ -18,7 +18,7 @@ See the shortcodes generated markup on /assets/dev/markup.html. Use "aye_shortco
 
 Example:
 
-	if(class_exists('\Aye\Shortcodes\AyeShortcodes')) {
+	if(class_exists('\Aye\Shortcodes\Core')) {
 		global $aye_shortcodes;
 		
 		add_filter('aye_shortcodes_available_filter', function($array) {

@@ -2,126 +2,55 @@
 
 namespace Aye\Shortcodes;
 
-class AyeShortcodes {
-
-	// Stores all shortcodes informations
-	protected $shortcodes; // maybe delete this one.
-
-	// Shortcodes passed to this array are shortcode that the theme is compatible with
-	protected $shortcodes_available;
+class Shortcodes {
 
 	function __construct() {
-
-		// Plugin shortcodes
-		$this->shortcodes = array(
-				'basic' => array('columns', 'tabs_vertical', 'tabs_horizontal', 'accordion', 'simple_button', 'icon_button', 'cta'),
-				'charts_and_tables' => array('pricing', 'progress_bar'),
-				'typography' => array('message_box', 'icon_list', 'icon_header', 'dropcap', 'blockquote'),
-				'interactive' => array('google_maps', 'ba_slider', 'counter', 'count_down', 'image_mapping', 'timeline')
-			);
-
-		add_action( 'init', array( $this, 'pluginInit') );
-	}
-
-	/**
-	 * init plugin after constructor and after theme is ready
-	 */
-	public function pluginInit() {
-		$this->loadAssets();
-		$this->shortcodes_available = apply_filters('aye_shortcodes_available_filter', $this->getAvailableShortcodes());
-		$this->registerShortcodes();
-	}
-
-	/**
-	 * Return a shortcodes list containing only shortcodes names
-	 *
-	 * @return array
-	 */
-	public function getAvailableShortcodes() {
-		$all_shortcodes = array();
-		foreach($this->shortcodes as $key => $shortcode) {
-			foreach($shortcode as $short) {
-				array_push($all_shortcodes, $short);
-			}
-		}
-
-		return $all_shortcodes;
-	}
-
-	/**
-	 * Check if the shortcode is available in the plugin
-	 *
-	 * @return boolean
-	 */
-	public function validShortcode($item) {
-		return in_array($item, $this->getAvailableShortcodes());
-	}
-
-	/**
-	 * Register enabled shortcodes
-	 *
-	 * @uses setAvailableShortcodes()
-	 */
-	public function registerShortcodes() {
-		if($this->shortcodes_available) {
-			foreach($this->shortcodes_available as $shortcode) {
-
-				// Register if shortcode name and shortcode method are available 
-				if(!shortcode_exists('aye_' . $shortcode) and method_exists($this, 'aye_' . $shortcode)) {
-					add_shortcode( 'aye_' . $shortcode, array( $this, 'aye_' . $shortcode ) );
-				}
-			}
-		}
-	}
-
-
-
-	function loadAssets() {
+		add_action( 'init', array( $this, 'loadAssets') );
 
 	}
 
-	function enableShortcode($shortcode) {
-		$shortcodes_enabled = get_option('aye_enables_shortcodes');
-
-		if(!$shortcode)
-			return;
-
-		if(is_array($shortcodes_enabled)) {
-			// Check if shortcode was already enabled
-			if(!in_array($shortcode, $shortcodes_enabled)) {
-				array_push($shortcodes_enabled, $shortcode);
-				update_option('aye_enables_shortcodes', $shortcodes_enabled, false);
-			}
-			
-		} else {
-
-			// If option is not initiate, add it with the first shortcode enabled
-			add_option('aye_enables_shortcodes', array($shortcode), false);
-		}
-		
+	public function loadAssets() {
+		wp_enqueue_style( 'ayeshortcodes', PLUGIN_URL . 'assets/css/main.min.css' );
 	}
 
-	function disableShortcode($shortcode) {
-		$shortcodes_enabled = get_option('aye_enables_shortcodes');
+	static function aye_column($atts, $content = '') {
+		$args = shortcode_atts( array(
+	        "lg"          => '',
+            "md"          => '',
+            "sm"          => '',
+            "xs"          => '',
+            "pull_lg"     => '',
+            "pull_md"     => '',
+            "pull_sm"     => '',
+            "pull_xs"     => '',
+            "push_lg"     => '',
+            "push_md"     => '',
+            "push_sm"     => '',
+            "push_xs"     => '',
+            "offset_lg"   => '',
+            "offset_md"   => '',
+            "offset_sm"   => '',
+            "offset_xs"   => '',
+	    ), $atts );
 
-		if(is_array($shortcodes_enabled)) {
+	    $class  = '';
+		$class .= ( $args['lg'] )                                      ? ' col-lg-' . $args['lg'] : '';
+		$class .= ( $args['md'] )                                      ? ' col-md-' . $args['md'] : '';
+		$class .= ( $args['sm'] )                                      ? ' col-sm-' . $args['sm'] : '';
+		$class .= ( $args['xs'] )                                      ? ' col-xs-' . $args['xs'] : '';
+		$class .= ( $args['pull_lg']   || $args['pull_lg'] === "0" )   ? ' col-lg-pull-' . $args['pull_lg'] : '';
+		$class .= ( $args['pull_md']   || $args['pull_md'] === "0" )   ? ' col-md-pull-' . $args['pull_md'] : '';
+		$class .= ( $args['pull_sm']   || $args['pull_sm'] === "0" )   ? ' col-sm-pull-' . $args['pull_sm'] : '';
+		$class .= ( $args['pull_xs']   || $args['pull_xs'] === "0" )   ? ' col-xs-pull-' . $args['pull_xs'] : '';
+		$class .= ( $args['push_lg']   || $args['push_lg'] === "0" )   ? ' col-lg-push-' . $args['push_lg'] : '';
+		$class .= ( $args['push_md']   || $args['push_md'] === "0" )   ? ' col-md-push-' . $args['push_md'] : '';
+		$class .= ( $args['push_sm']   || $args['push_sm'] === "0" )   ? ' col-sm-push-' . $args['push_sm'] : '';
+		$class .= ( $args['push_xs']   || $args['push_xs'] === "0" )   ? ' col-xs-push-' . $args['push_xs'] : '';
+		$class .= ( $args['offset_lg'] || $args['offset_lg'] === "0" ) ? ' col-lg-offset-' . $args['offset_lg'] : '';
+		$class .= ( $args['offset_md'] || $args['offset_md'] === "0" ) ? ' col-md-offset-' . $args['offset_md'] : '';
+		$class .= ( $args['offset_sm'] || $args['offset_sm'] === "0" ) ? ' col-sm-offset-' . $args['offset_sm'] : '';
+		$class .= ( $args['offset_xs'] || $args['offset_xs'] === "0" ) ? ' col-xs-offset-' . $args['offset_xs'] : '';
 
-			// Search, delete and update the shortcodes list
-			$shortcode_delete = array_search($shortcode, $shortcodes_enabled);
-			
-			unset($shortcodes_enabled[$shortcode_delete]);
-
-			update_option('aye_enables_shortcodes', $shortcodes_enabled, false);
-
-		}
+		return '<div class="' . $class . '">' . do_shortcode($content) . '</div>';
 	}
-
-	function activationHook() {
-		
-	}
-
-	function deactivationHook() {
-		
-	}
-
 }

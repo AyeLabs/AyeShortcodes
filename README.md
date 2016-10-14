@@ -1,15 +1,28 @@
 # AyeShortcodes
 Helpful shortcodes with basic design, also a companion plugin for all themes available at AyeLabs.
 
-# 01. Shortcodes available
+# Shortcodes available
 
-# 02. How to install
+# Hooks
 
-# 03. Development Info
+# F.A.Q
+- How to install AyeShortcodes plugin?
+Upload 'ayeshortcodes' to the '/wp-content/plugins/' directory
+Activate the plugin through the 'Plugins' menu in WordPress
 
-# 04. Hooks
+- How can i integrate the plugin with my theme design?
+See the shortcodes generated markup on /assets/dev/markup.html. Use "aye_shortcodes_available_filter" filter to pass to the plugin what shortcodes your theme is using from the plugin, this will prevent the plugin to enqueue duplicate styles so you can add your ones easily in your theme or child theme.
 
-# 05. Requirements
+Example:
+	if(class_exists('\Aye\Shortcodes\AyeShortcodes')) {
+		global $aye_shortcodes;
+		
+		add_filter('aye_shortcodes_available_filter', function($array) {
+			return array('columns', 'bla');
+		});
+	}
+
+# Requirements
 - PHP 5.3
 
-# 05. Change Log
+# Change Log

@@ -1,0 +1,19 @@
+{
+  "name": "ayeshortcodes",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Robert Hapiuc <roberthapiuc@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/AyeLabs/AyeShortcodes",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "assets/libs",
+    "test",
+    "tests"
+  ]
+}

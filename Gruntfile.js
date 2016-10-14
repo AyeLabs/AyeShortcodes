@@ -14,7 +14,7 @@ module.exports = function(grunt) {
               sourceMap: false
             },
             files: {
-              'assets/css/concat/main.min.css' : 'assets/scss/main.scss',
+              'assets/css/main.min.css' : 'assets/scss/main.scss',
             }
           },
           dev: {

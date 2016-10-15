@@ -3,6 +3,7 @@
 namespace Aye\Shortcodes;
 
 class Shortcodes {
+	private $tab_titles = array();
 
 	function __construct() {
 		add_action( 'init', array( $this, 'loadAssets') );
@@ -52,5 +53,35 @@ class Shortcodes {
 		$class .= ( $args['offset_xs'] || $args['offset_xs'] === "0" ) ? ' col-xs-offset-' . $args['offset_xs'] : '';
 
 		return '<div class="' . $class . '">' . do_shortcode($content) . '</div>';
+	}
+
+	static function aye_tabs($atts, $content) {
+		$args = shortcode_atts( array(
+	        "orientation"          => 'horizontal'
+	    ), $atts );
+
+		$return = '<div class="row">';
+
+		// Start tabs
+	    if($args['orientation'] == 'horizontal') {
+			$return .= '<div class="tabs col-md-12 col-sm-12 col-xs-12 col-lg-12">';
+	    } else {
+			$return .= '<div class="col-md-4 col-sm-4 col-xs-4 col-lg-4">';
+	    }
+
+	    foreach($this->tab_titles as $title) {
+	    	echo '<div class="tab">' . esc_html($title) . '</div>';
+	    }
+
+	    // End divs
+		$return .= '</div><!--/.tabs-->';
+
+
+
+		echo do_shortcode($content) . '</div><!-- / .row -->';
+	}
+
+	static function aye_tabs_vertical_item($atts, $content = "") {
+
 	}
 }

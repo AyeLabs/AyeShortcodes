@@ -11,7 +11,8 @@ class Shortcodes {
 	}
 
 	public function loadAssets() {
-		wp_enqueue_style( 'ayeshortcodes', PLUGIN_URL . 'assets/css/main.min.css' );
+		wp_enqueue_style( 'bootstrap', PLUGIN_URL . 'assets/css/main.min.css' );
+		wp_enqueue_script( 'ayeshortcode', PLUGIN_URL . 'assets/js/scripts.js', array('jquery') );
 	}
 
 	static function aye_column($atts, $content = '') {
@@ -55,33 +56,53 @@ class Shortcodes {
 		return '<div class="' . $class . '">' . do_shortcode($content) . '</div>';
 	}
 
-	static function aye_tabs($atts, $content) {
+	static function aye_tabs($atts, $content = '') {
 		$args = shortcode_atts( array(
 	        "orientation"          => 'horizontal'
 	    ), $atts );
 
-		$return = '<div class="row">';
+		$return = '<div class="row aye_tabs '.$args['orientation'].'">';
 
 		// Start tabs
 	    if($args['orientation'] == 'horizontal') {
 			$return .= '<div class="tabs col-md-12 col-sm-12 col-xs-12 col-lg-12">';
 	    } else {
-			$return .= '<div class="col-md-4 col-sm-4 col-xs-4 col-lg-4">';
+			$return .= '<div class="tabs col-md-4 col-sm-4 col-xs-12 col-lg-4">';
 	    }
 
-	    foreach($this->tab_titles as $title) {
-	    	echo '<div class="tab">' . esc_html($title) . '</div>';
+	    $tab_content = do_shortcode(wp_strip_all_tags($content));
+
+	    foreach($this->tab_titles as $key => $title) {
+	    	$return .= '<div class="tab'.($key == 0 ? ' active' : '').'" data-tab="'. esc_attr($key) .'">' . esc_html($title) . '</div>';
 	    }
 
-	    // End divs
+	    // End tabs
 		$return .= '</div><!--/.tabs-->';
 
+		// Start contennt
+		if($args['orientation'] == 'horizontal') {
+			$return .= '<div class="content col-md-12 col-sm-12 col-xs-12 col-lg-12">';
+		} else{
+			$return .= '<div class="content col-md-8 col-sm-8 col-xs-12 col-lg-8">';
+		}
 
+		// Content and closing divs
+		$return .= $tab_content . '</div><!--/.content--></div><!-- / .row -->';
 
-		echo do_shortcode($content) . '</div><!-- / .row -->';
+		return $return;
 	}
 
-	static function aye_tabs_vertical_item($atts, $content = "") {
+	static function aye_tab($atts, $content = "") {
+		$args = shortcode_atts( array(
+	        "title"          => ''
+	    ), $atts );
+
+	    $title = $args['title'];
+		if(!empty($args['title']) and !in_array($args['title'], $this->tab_titles)) {
+	    	$count = array_push($this->tab_titles, $title);
+		}
+
+		return '<div class="tab_content" style="display: '.(($count - 1) == 0 ? 'block' : 'none').';" data-tabcontent="'. ($count - 1) .'">' . do_shortcode($content) . '</div>';
 
 	}
 }

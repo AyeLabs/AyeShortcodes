@@ -1016,4 +1016,17 @@
   }
 }
 
+.aye_tabs.vertical .tabs .tab:last-child {
+  border-bottom: none;
+}
+
+.aye_tabs .tabs .tab {
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+.aye_tabs .tabs .tab.active {
+  font-weight: bold;
+}
+
 /*# sourceMappingURL=main.css.map */

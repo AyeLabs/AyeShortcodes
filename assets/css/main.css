@@ -1029,4 +1029,31 @@
   font-weight: bold;
 }
 
+.aye_button,
+.aye_button.fa {
+  display: inline-block;
+  line-height: 36px;
+  background: #007acc;
+  color: #fff;
+  padding: 5px 15px;
+  font-size: 16px;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.aye_button:hover,
+.aye_button.fa:hover {
+  opacity: 0.8;
+  color: #fff;
+}
+
+.aye_button.fa {
+  padding-left: 45px;
+}
+
+.aye_button.fa:before {
+  left: 15px;
+  position: absolute;
+}
+
 /*# sourceMappingURL=main.css.map */

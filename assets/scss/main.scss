@@ -34,3 +34,30 @@
 		}
 	}
 }
+
+// Buttons
+.aye_button,
+.aye_button.fa {
+	display: inline-block;
+	line-height: 36px;
+	background: #007acc;
+	color: #fff;
+	padding: 5px 15px;
+	font-size: 16px;
+	transition: all 0.3s;
+	position: relative;
+
+	&:hover {
+		opacity: 0.8;
+		color: #fff;
+	}
+}
+
+.aye_button.fa {
+	padding-left: 45px;
+
+	&:before {
+		left: 15px;
+		position: absolute;
+	}
+}

@@ -12,6 +12,7 @@ class Shortcodes {
 
 	public function loadAssets() {
 		wp_enqueue_style( 'bootstrap', PLUGIN_URL . 'assets/css/main.min.css' );
+		wp_enqueue_style( 'fontawesome', PLUGIN_URL . 'assets/libs/font-awesome/css/font-awesome.min.css' );
 		wp_enqueue_script( 'ayeshortcode', PLUGIN_URL . 'assets/js/scripts.js', array('jquery') );
 	}
 
@@ -103,6 +104,44 @@ class Shortcodes {
 		}
 
 		return '<div class="tab_content" style="display: '.(($count - 1) == 0 ? 'block' : 'none').';" data-tabcontent="'. ($count - 1) .'">' . do_shortcode($content) . '</div>';
+
+	}
+
+	static function aye_button($atts) {
+		$args = shortcode_atts( array(
+	        "url"          => '',
+	        "label"          => '',
+	        "target"          => '',
+	        "id"          => '',
+	        "icon"          => ''
+	    ), $atts );
+
+		// Build class
+	    $class = "aye_button";
+	    if(!empty($args['icon'])) {
+	    	$class .= ' fa fa-' . $args['icon'];
+	    }
+
+	    // Get permalink if id it's used
+	    $permalink = $args['url'];
+	    if(!empty($args['id'])) {
+	    	$permalink = get_permalink($args['id']);
+	    }
+
+	    // Build target
+    	$current_url = parse_url(home_url());
+    	$shortcode_url = parse_url($permalink);
+
+    	if($current_url['host'] != $shortcode_url['host'] and empty($args['target'])) {
+    		$target = '_blank';
+    	} elseif(!empty($args['target'])) {
+    		$target = $args['target'];
+    	} else {
+    		$target = '';
+    	}
+
+    	return '<a class="'.esc_attr($class).'" '.(empty($target) ? '' : 'target="'.esc_attr($target).'"').' href="'.esc_url($permalink).'">'.$args['label'].'</a>';
+
 
 	}
 }

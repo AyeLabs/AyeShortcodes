@@ -37,24 +37,24 @@ class Shortcodes {
 	    ), $atts );
 
 	    $class  = '';
-		$class .= ( $args['lg'] )                                      ? ' col-lg-' . $args['lg'] : '';
-		$class .= ( $args['md'] )                                      ? ' col-md-' . $args['md'] : '';
-		$class .= ( $args['sm'] )                                      ? ' col-sm-' . $args['sm'] : '';
-		$class .= ( $args['xs'] )                                      ? ' col-xs-' . $args['xs'] : '';
-		$class .= ( $args['pull_lg']   || $args['pull_lg'] === "0" )   ? ' col-lg-pull-' . $args['pull_lg'] : '';
-		$class .= ( $args['pull_md']   || $args['pull_md'] === "0" )   ? ' col-md-pull-' . $args['pull_md'] : '';
-		$class .= ( $args['pull_sm']   || $args['pull_sm'] === "0" )   ? ' col-sm-pull-' . $args['pull_sm'] : '';
-		$class .= ( $args['pull_xs']   || $args['pull_xs'] === "0" )   ? ' col-xs-pull-' . $args['pull_xs'] : '';
-		$class .= ( $args['push_lg']   || $args['push_lg'] === "0" )   ? ' col-lg-push-' . $args['push_lg'] : '';
-		$class .= ( $args['push_md']   || $args['push_md'] === "0" )   ? ' col-md-push-' . $args['push_md'] : '';
-		$class .= ( $args['push_sm']   || $args['push_sm'] === "0" )   ? ' col-sm-push-' . $args['push_sm'] : '';
-		$class .= ( $args['push_xs']   || $args['push_xs'] === "0" )   ? ' col-xs-push-' . $args['push_xs'] : '';
-		$class .= ( $args['offset_lg'] || $args['offset_lg'] === "0" ) ? ' col-lg-offset-' . $args['offset_lg'] : '';
-		$class .= ( $args['offset_md'] || $args['offset_md'] === "0" ) ? ' col-md-offset-' . $args['offset_md'] : '';
-		$class .= ( $args['offset_sm'] || $args['offset_sm'] === "0" ) ? ' col-sm-offset-' . $args['offset_sm'] : '';
-		$class .= ( $args['offset_xs'] || $args['offset_xs'] === "0" ) ? ' col-xs-offset-' . $args['offset_xs'] : '';
+		$class .= ( $args['lg'] )                                      ? ' col-lg-'. $args['lg'] : '';
+		$class .= ( $args['md'] )                                      ? ' col-md-'. $args['md'] : '';
+		$class .= ( $args['sm'] )                                      ? ' col-sm-'. $args['sm'] : '';
+		$class .= ( $args['xs'] )                                      ? ' col-xs-'. $args['xs'] : '';
+		$class .= ( $args['pull_lg']   || $args['pull_lg'] === "0" )   ? ' col-lg-pull-'. $args['pull_lg'] : '';
+		$class .= ( $args['pull_md']   || $args['pull_md'] === "0" )   ? ' col-md-pull-'. $args['pull_md'] : '';
+		$class .= ( $args['pull_sm']   || $args['pull_sm'] === "0" )   ? ' col-sm-pull-'. $args['pull_sm'] : '';
+		$class .= ( $args['pull_xs']   || $args['pull_xs'] === "0" )   ? ' col-xs-pull-'. $args['pull_xs'] : '';
+		$class .= ( $args['push_lg']   || $args['push_lg'] === "0" )   ? ' col-lg-push-'. $args['push_lg'] : '';
+		$class .= ( $args['push_md']   || $args['push_md'] === "0" )   ? ' col-md-push-'. $args['push_md'] : '';
+		$class .= ( $args['push_sm']   || $args['push_sm'] === "0" )   ? ' col-sm-push-'. $args['push_sm'] : '';
+		$class .= ( $args['push_xs']   || $args['push_xs'] === "0" )   ? ' col-xs-push-'. $args['push_xs'] : '';
+		$class .= ( $args['offset_lg'] || $args['offset_lg'] === "0" ) ? ' col-lg-offset-'. $args['offset_lg'] : '';
+		$class .= ( $args['offset_md'] || $args['offset_md'] === "0" ) ? ' col-md-offset-'. $args['offset_md'] : '';
+		$class .= ( $args['offset_sm'] || $args['offset_sm'] === "0" ) ? ' col-sm-offset-'. $args['offset_sm'] : '';
+		$class .= ( $args['offset_xs'] || $args['offset_xs'] === "0" ) ? ' col-xs-offset-'. $args['offset_xs'] : '';
 
-		return '<div class="' . $class . '">' . do_shortcode($content) . '</div>';
+		return '<div class="'. $class .'">'. do_shortcode($content) .'</div>';
 	}
 
 	static function aye_tabs($atts, $content = '') {
@@ -74,7 +74,7 @@ class Shortcodes {
 	    $tab_content = do_shortcode(wp_strip_all_tags($content));
 
 	    foreach($this->tab_titles as $key => $title) {
-	    	$return .= '<div class="tab'.($key == 0 ? ' active' : '').'" data-tab="'. esc_attr($key) .'">' . esc_html($title) . '</div>';
+	    	$return .= '<div class="tab'.($key == 0 ? ' active' : '').'" data-tab="'. esc_attr($key) .'">'. esc_html($title) .'</div>';
 	    }
 
 	    // End tabs
@@ -103,7 +103,7 @@ class Shortcodes {
 	    	$count = array_push($this->tab_titles, $title);
 		}
 
-		return '<div class="tab_content" style="display: '.(($count - 1) == 0 ? 'block' : 'none').';" data-tabcontent="'. ($count - 1) .'">' . do_shortcode($content) . '</div>';
+		return '<div class="tab_content" style="display: '. (($count - 1) == 0 ? 'block' : 'none') .';" data-tabcontent="'. ($count - 1) .'">'. do_shortcode($content) .'</div>';
 
 	}
 
@@ -140,8 +140,14 @@ class Shortcodes {
     		$target = '';
     	}
 
-    	return '<a class="'.esc_attr($class).'" '.(empty($target) ? '' : 'target="'.esc_attr($target).'"').' href="'.esc_url($permalink).'">'.$args['label'].'</a>';
+    	return '<a class="'. esc_attr($class) .'" '. (empty($target) ? '' : 'target="'. esc_attr($target) .'"').' href="' .esc_url($permalink) .'">'. $args['label'] .'</a>';
+	}
 
+	static function aye_cta($atts, $content = "") {
+		$args = shortcode_atts( array(
+	        "position"		=> 'left'
+	    ), $atts );
 
+		return '<div class="aye_cta '.$args['position'].'">'. do_shortcode($content) .'</div><!-- / .aye_cta -->';
 	}
 }

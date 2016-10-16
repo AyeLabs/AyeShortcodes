@@ -1039,6 +1039,8 @@
   font-size: 16px;
   transition: all 0.3s;
   position: relative;
+  text-decoration: none;
+  box-shadow: none;
 }
 
 .aye_button:hover,
@@ -1054,6 +1056,44 @@
 .aye_button.fa:before {
   left: 15px;
   position: absolute;
+}
+
+.aye_cta {
+  padding: 3%;
+  overflow: hidden;
+  background: #007acc;
+  width: 110%;
+  margin-left: -5%;
+  color: #fff;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  vertical-align: middle;
+  line-height: 48px;
+}
+
+.aye_cta.left .aye_button {
+  float: left;
+  margin-right: 20px;
+}
+
+.aye_cta.right .aye_button {
+  float: right;
+  margin-left: 20px;
+}
+
+.aye_cta.center {
+  text-align: center;
+}
+
+.aye_cta.center .aye_button {
+  clear: both;
+  margin: 0 auto;
+  margin-top: 15px;
+  display: table;
+}
+
+.aye_cta .aye_button {
+  border: 2px solid #fff;
 }
 
 /*# sourceMappingURL=main.css.map */

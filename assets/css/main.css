@@ -1096,4 +1096,56 @@
   border: 2px solid #fff;
 }
 
+.aye_pricing_table {
+  padding: 20px;
+  transition: all 0.3s;
+}
+
+.aye_pricing_table p {
+  display: none;
+}
+
+.aye_pricing_table:nth-child(odd) {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.aye_pricing_table.aye_pricing_highlighted {
+  box-shadow: 0 0 0 2px rgba(255, 99, 71, 0.7) inset, 0 0 15px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+}
+
+.aye_pricing_table:hover.aye_pricing_highlighted {
+  box-shadow: 0 0 0 2px rgba(255, 99, 71, 0.9) inset, 0 0 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+.aye_pricing_table .aye_pricing_title {
+  margin-bottom: 20px;
+}
+
+.aye_pricing_table .aye_pricing_title span {
+  width: 100%;
+  text-align: center;
+  display: block;
+}
+
+.aye_pricing_table .aye_pricing_title span.title {
+  font-size: 22px;
+}
+
+.aye_pricing_table .aye_pricing_title span.price {
+  font-size: 18px;
+}
+
+.aye_pricing_table .aye_pricing_row {
+  padding: 10px 0;
+  font-size: 14px;
+  text-align: center;
+  display: block;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.aye_pricing_table .aye_button {
+  display: block;
+}
+
 /*# sourceMappingURL=main.css.map */

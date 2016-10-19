@@ -108,3 +108,57 @@
 		border: 2px solid #fff;
 	}
 }
+
+.aye_pricing_table {
+	padding: 20px;
+	transition: all 0.3s;
+
+	p {
+		display: none;
+	}
+
+	&:nth-child(odd) {
+		background: rgba(black, 0.02);
+	}
+
+	&.aye_pricing_highlighted {
+		box-shadow: 0 0 0 2px rgba(tomato, 0.7) inset, 0 0 15px 0 rgba(black, 0.1);
+		border-radius: 2px;
+	}
+
+	&:hover {
+		&.aye_pricing_highlighted {
+			box-shadow: 0 0 0 2px rgba(tomato, 0.9) inset, 0 0 20px 0 rgba(black, 0.1);
+		}
+	}
+
+	.aye_pricing_title {
+		margin-bottom: 20px;
+
+		span {
+			width: 100%;
+			text-align: center;
+			display: block;
+
+			&.title {
+				font-size: 22px;
+			}
+
+			&.price {
+				font-size: 18px;
+			}
+		}
+	}
+
+	.aye_pricing_row {
+		padding: 10px 0;
+		font-size: 14px;
+		text-align: center;
+		display: block;
+		border-top: 1px solid rgba(black, 0.1);
+	}
+
+	.aye_button {
+		display: block;
+	}
+}

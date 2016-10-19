@@ -19,11 +19,10 @@ class Core {
 		// Plugin shortcodes
 		$this->shortcodes_details = array(
 				'basic' => array('column', 'tabs', 'tab', 'button', 'cta'),
-				'charts_and_tables' => array('pricing', 'progress_bar'),
+				'charts_and_tables' => array('pricing_title', 'pricing_row', 'progress_bar'),
 				'typography' => array('message_box', 'icon_list', 'icon_header', 'dropcap', 'blockquote'),
 				'interactive' => array('google_maps', 'ba_slider', 'counter', 'count_down', 'image_mapping', 'timeline')
 			);
-
 		add_action( 'init', array( $this, 'pluginInit') );
 	}
 
@@ -76,6 +75,17 @@ class Core {
 			}
 		}
 	}
+
+	function the_content_filter($content) {
+	// array of custom shortcodes requiring the fix 
+	$block = join("|",array("col","shortcode2","shortcode3"));
+	// opening tag
+	$rep = preg_replace("/(<p>)?\[($block)(\s[^\]]+)?\](<\/p>|<br \/>)?/","[$2$3]",$content);
+		
+	// closing tag
+	$rep = preg_replace("/(<p>)?\[\/($block)](<\/p>|<br \/>)?/","[/$2]",$rep);
+	return $rep;
+}
 
 	function enableShortcode($shortcode) {
 		$shortcodes_enabled = get_option('aye_enables_shortcodes');

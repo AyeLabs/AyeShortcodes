@@ -34,6 +34,8 @@ class Shortcodes {
             "offset_md"   => '',
             "offset_sm"   => '',
             "offset_xs"   => '',
+            "pricing_table"   => '',
+            "pricing_highlighted"   => '',
 	    ), $atts );
 
 	    $class  = '';
@@ -53,6 +55,8 @@ class Shortcodes {
 		$class .= ( $args['offset_md'] || $args['offset_md'] === "0" ) ? ' col-md-offset-'. $args['offset_md'] : '';
 		$class .= ( $args['offset_sm'] || $args['offset_sm'] === "0" ) ? ' col-sm-offset-'. $args['offset_sm'] : '';
 		$class .= ( $args['offset_xs'] || $args['offset_xs'] === "0" ) ? ' col-xs-offset-'. $args['offset_xs'] : '';
+		$class .= ( $args['pricing_table'] || $args['pricing_table'] === "0" ) ? ' aye_pricing_table '. $args['pricing_table'] : '';
+		$class .= ( $args['pricing_highlighted'] || $args['pricing_highlighted'] === "0" ) ? ' aye_pricing_highlighted' : '';
 
 		return '<div class="'. $class .'">'. do_shortcode($content) .'</div>';
 	}
@@ -148,6 +152,28 @@ class Shortcodes {
 	        "position"		=> 'left'
 	    ), $atts );
 
-		return '<div class="aye_cta '.$args['position'].'">'. do_shortcode($content) .'</div><!-- / .aye_cta -->';
+		return '<div class="aye_cta '. $args['position'] .'">'. do_shortcode($content) .'</div><!-- / .aye_cta -->';
 	}
+
+	static function aye_pricing_title($atts) {
+		$args = shortcode_atts( array(
+	        "title"          => '',
+	        "price"			 => ''
+	    ), $atts );
+
+	    return '<div class="aye_pricing_title"><span class="title">'. $args['title'] .'</span><span class="price">'. $args['price'] .'</span></div><!-- / .aye_pricing_title -->';
+	}
+
+	static function aye_pricing_row($atts) {
+		$args = shortcode_atts( array(
+	        "content"          => '',
+	        "icon"			 => ''
+	    ), $atts );
+
+	    $class = "aye_pricing_row";
+
+		return '<div class="aye_pricing_row">'. (( $args['icon'] || $args['icon'] === "0" ) ? '<i class="fa fa-'. $args['icon'] . '"></i>' : '') . ' '  . $args['content'] .'</div>';
+	}
+
+
 }

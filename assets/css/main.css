@@ -1178,4 +1178,15 @@
   font-size: 12px;
 }
 
+.aye_message_box {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+.aye_message_box i {
+  margin: 0 10px;
+}
+
 /*# sourceMappingURL=main.css.map */

@@ -76,17 +76,6 @@ class Core {
 		}
 	}
 
-	function the_content_filter($content) {
-	// array of custom shortcodes requiring the fix 
-	$block = join("|",array("col","shortcode2","shortcode3"));
-	// opening tag
-	$rep = preg_replace("/(<p>)?\[($block)(\s[^\]]+)?\](<\/p>|<br \/>)?/","[$2$3]",$content);
-		
-	// closing tag
-	$rep = preg_replace("/(<p>)?\[\/($block)](<\/p>|<br \/>)?/","[/$2]",$rep);
-	return $rep;
-}
-
 	function enableShortcode($shortcode) {
 		$shortcodes_enabled = get_option('aye_enables_shortcodes');
 

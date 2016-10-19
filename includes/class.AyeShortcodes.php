@@ -197,5 +197,49 @@ class Shortcodes {
 		return $return;
 	}
 
+	static function aye_message_box($atts) {
+		$args = shortcode_atts( array(
+	        "type"			 => '',
+	        "text"			 => '',
+	        "icon"			 => '',
+	        "color"			 => '',
+	        "background"	 => ''
+	    ), $atts );
+	    
+    	// Set defaults
+	    $icon = ( $args['icon'] ) ? $args['icon'] : '';
+	    $background = ( $args['background'] ) ? $args['background'] : '#DDD';
+	    $color = ( $args['color'] ) ? $args['color'] : '';
+
+	    // Set background and icon based on type
+    	if("error" == $args['type']) {
+    		$background = '#FF6347';
+    		$color = '#FFF';
+    		$icon = 'ban';
+    	} elseif("warning" == $args['type']) {
+    		$background = '#FF8E47';
+    		$color = '#FFF';
+    		$icon = 'exclamation-triangle';
+    	} elseif("info" == $args['type']) {
+    		$background = '#007acc';
+    		$color = '#FFF';
+    		$icon = 'info-circle';
+    	} elseif("success" == $args['type']) {
+    		$background = '#1CFF8B';
+    		$color = '#FFF';
+    		$icon = 'check';
+    	}
+
+    	$return = '<div class="aye_message_box '. $args['type'] .'" style="color: '. esc_attr($color) .'; background-color: '. esc_attr($background) .';">';
+
+    	if(!empty($icon)) {
+    		$return .= '<i class="fa fa-'. esc_attr($icon) .'"></i> ';
+    	}
+
+    	$return .= $args['text'] . '</div>';
+
+    	return $return;
+	}
+
 
 }

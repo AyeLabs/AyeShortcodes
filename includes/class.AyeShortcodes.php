@@ -175,5 +175,27 @@ class Shortcodes {
 		return '<div class="aye_pricing_row">'. (( $args['icon'] || $args['icon'] === "0" ) ? '<i class="fa fa-'. $args['icon'] . '"></i>' : '') . ' '  . $args['content'] .'</div>';
 	}
 
+	static function aye_progress_bar($atts) {
+		$args = shortcode_atts( array(
+	        "percent"          => 0,
+	        "icon"			 => '',
+	        "label"			 => ''
+	    ), $atts );
+
+		$return = '<div class="aye_progress_bar"><div class="loading" style="width: '. esc_attr($args['percent']) .'%;"></div><!-- / .loading -->';
+
+		if(!empty($args['icon'])) {
+			$return .= '<i class="fa fa-'. esc_attr($args['icon']) .'"></i>';
+		}
+
+		if(!empty($args['label'])) {
+			$return .= '<span>' . $args['label'] . '</span>';
+		}
+
+		$return .= '</div>';
+
+		return $return;
+	}
+
 
 }

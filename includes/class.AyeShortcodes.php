@@ -241,5 +241,13 @@ class Shortcodes {
     	return $return;
 	}
 
+	static function aye_icon($atts) {
+		$args = shortcode_atts( array(
+	        "type"			 => '',
+	    ), $atts );
+
+	    return '<i class="fa fa-'. esc_attr($args['type']) .'"></i>';
+	}
+
 
 }

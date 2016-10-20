@@ -20,7 +20,7 @@ class Core {
 		$this->shortcodes_details = array(
 				'basic' => array('column', 'tabs', 'tab', 'button', 'cta'),
 				'charts_and_tables' => array('pricing_title', 'pricing_row', 'progress_bar'),
-				'typography' => array('message_box', 'icon_list', 'icon_header', 'dropcap', 'blockquote'),
+				'typography' => array('message_box', 'icon', 'dropcap', 'blockquote'),
 				'interactive' => array('google_maps', 'ba_slider', 'counter', 'count_down', 'image_mapping', 'timeline')
 			);
 		add_action( 'init', array( $this, 'pluginInit') );

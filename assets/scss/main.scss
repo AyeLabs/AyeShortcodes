@@ -211,3 +211,28 @@
 	line-height: 1em;
 	text-transform: uppercase;
 }
+
+.aye_blockquote {
+	font-size: 1.5em;
+	padding: 5%;
+	line-height: 2em;
+	font-style: italic;
+	position: relative;
+
+	&:before {
+		content: open-quote;
+		font-size: 8em;
+		opacity: 0.1;
+		position: absolute;
+		bottom: -0.2em;
+	}
+
+	.author {
+		position: absolute;
+		color: rgba(black, 0.3);
+		bottom: -0.4em; left: 10em;
+		display: block;
+		width: 100%;
+		font-size: 0.7em;
+	}
+}

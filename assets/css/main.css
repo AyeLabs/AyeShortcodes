@@ -1197,4 +1197,30 @@
   text-transform: uppercase;
 }
 
+.aye_blockquote {
+  font-size: 1.5em;
+  padding: 5%;
+  line-height: 2em;
+  font-style: italic;
+  position: relative;
+}
+
+.aye_blockquote:before {
+  content: open-quote;
+  font-size: 8em;
+  opacity: 0.1;
+  position: absolute;
+  bottom: -0.2em;
+}
+
+.aye_blockquote .author {
+  position: absolute;
+  color: rgba(0, 0, 0, 0.3);
+  bottom: -0.4em;
+  left: 10em;
+  display: block;
+  width: 100%;
+  font-size: 0.7em;
+}
+
 /*# sourceMappingURL=main.css.map */

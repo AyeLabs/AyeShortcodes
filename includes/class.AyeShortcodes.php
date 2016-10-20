@@ -272,5 +272,22 @@ class Shortcodes {
 		return '<span'. $style .' class="aye_dropcap">'. do_shortcode($content) .'</span>';
 	}
 
+	static function aye_blockquote($atts, $content = "") {
+		$args = shortcode_atts( array(
+	        "position"			 => 'left',
+	        "columns"			 => 'col-md-4',
+	        "author"			 => ''
+	    ), $atts );
+
+		$return = '<div class="aye_blockquote '. esc_attr($args['columns']) .' col-lg-12 col-sm-12 col-xs-12" style="float: '. esc_attr($args['position']) .';">' . $content;
+
+		if(!empty($args['author'])) {
+			$return .= '<span class="author">'. $args['author'] .'</span>';
+		}
+
+		$return .= '</div>';
+
+		return $return;
+	}
 
 }

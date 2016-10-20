@@ -249,5 +249,28 @@ class Shortcodes {
 	    return '<i class="fa fa-'. esc_attr($args['type']) .'"></i>';
 	}
 
+	static function aye_dropcap($atts, $content = "") {
+		$args = shortcode_atts( array(
+	        "color"			 => '',
+	        "font"			 => ''
+	    ), $atts );
+
+		if( !empty($args['color']) or !empty($args['font']) ) {
+		    $style = ' style="';
+
+		    if(!empty($args['color'])) {
+		    	$style .= 'color: '. esc_attr($args['color']) .';';
+		    }
+
+		    if(!empty($args['font'])) {
+		    	$style .= 'font-family: '. esc_attr($args['font']) .';';
+		    }
+
+		    $style .= '" ';
+		}
+
+		return '<span'. $style .' class="aye_dropcap">'. do_shortcode($content) .'</span>';
+	}
+
 
 }

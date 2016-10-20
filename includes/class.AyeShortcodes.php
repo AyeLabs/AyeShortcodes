@@ -290,4 +290,38 @@ class Shortcodes {
 		return $return;
 	}
 
+	static function aye_label($atts) {
+		$args = shortcode_atts( array(
+	        "icon"			 => '',
+	        "background"	 => 'tomato',
+	        "label"	 => 'tomato',
+	        "arrow"	 => '',
+	        "color"			 => 'white'
+	    ), $atts );
+
+		// Build class
+	    $class = "aye_label";
+	    if(!empty($args['arrow'])) {
+	    	$class .= ' ' . $args['arrow'];
+	    }
+	    
+
+	    // Build Style
+	    $style = ' style="' . 
+	    	(!empty($args['color']) ? 'color: '. esc_attr($args['color']) .';' : '') . 
+	    	(!empty($args['background']) ? 'background-color: '. esc_attr($args['background']) .';' : '') .
+	    	'" ';
+
+	    // Build return
+	    $return = '<span class="'. $class .'"'. $style .'>';
+
+	    // Add icon
+	    if(!empty($args['icon'])) {
+	    	$return .= '<i class="fa fa-' . $args['icon'] . '"></i> ';
+	    }
+
+	    $return .= esc_html($args['label']) .'</span>';
+
+	    return $return;
+	}
 }

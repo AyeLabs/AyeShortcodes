@@ -236,3 +236,17 @@
 		font-size: 0.7em;
 	}
 }
+
+.aye_label {
+	padding: 4px 8px;
+	
+	&:before {
+		content: "";
+		display: block;
+		width: 0;
+		height: 0;
+	}
+
+	&.left {
+	}
+}

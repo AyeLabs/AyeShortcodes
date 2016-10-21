@@ -1300,4 +1300,19 @@
   display: none;
 }
 
+.aye_divider_gotop {
+  width: 100%;
+  clear: both;
+  text-align: right;
+  font-size: 11px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #ccc;
+}
+
+.aye_divider_gotop:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 /*# sourceMappingURL=main.css.map */

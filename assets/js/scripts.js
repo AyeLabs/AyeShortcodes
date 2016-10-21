@@ -21,4 +21,9 @@ jQuery(document).ready(function($) {
 			$(this).removeClass('active');
 		}
 	});
+
+	// Back to top
+	$('.aye_divider_gotop').click(function() {
+		$('body, html').animate({ scrollTop: 0});
+	});
 });

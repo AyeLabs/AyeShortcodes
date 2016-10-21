@@ -338,4 +338,22 @@ class Shortcodes {
 	    	</div><!-- / .aye_accordion -->';
 	    }
 	}
+	
+	static function aye_divider_gotop($atts) {
+		$args = shortcode_atts( array(
+	        "border_color"			 => '',
+	        "border_height"			 => '',
+	        "color"					 => '',
+	        "margin"		 => ''
+	    ), $atts );
+
+	   	// Build style
+	   	$style = ' style="' . 
+	    	(!empty($args['border_color']) ? 'border-color: '. esc_attr($args['border_color']) .';' : '') . 
+	    	(!empty($args['color']) ? 'color: '. esc_attr($args['color']) .';' : '') . 
+	    	(!empty($args['border_height']) ? 'border-width: '. esc_attr($args['border_height']) .';' : '') .
+	    	(!empty($args['margin']) ? 'margin: '. esc_attr($args['margin']) .' 0;' : '') . '" ';
+
+		return '<div class="aye_divider_gotop"'. $style .'><span>&#8657; '. __('Back to top', 'ayeshort') .'</span></div><!-- / .aye_divider_gotop -->';
+	}
 }

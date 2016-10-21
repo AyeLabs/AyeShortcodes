@@ -1225,13 +1225,60 @@
 
 .aye_label {
   padding: 4px 8px;
+  position: relative;
+  margin: 3px;
 }
 
 .aye_label:before {
   content: "";
-  display: block;
   width: 0;
   height: 0;
+  border-style: solid;
+  border-color: inherit;
+  border-width: 5px;
+  margin: auto;
+}
+
+.aye_label.left:before, .aye_label.right:before {
+  top: 0;
+  bottom: 0;
+}
+
+.aye_label.top:before, .aye_label.bottom:before {
+  left: 0;
+  right: 0;
+}
+
+.aye_label.left:before {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  left: -10px;
+  position: absolute;
+}
+
+.aye_label.right:before {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+  right: -10px;
+  position: absolute;
+}
+
+.aye_label.bottom:before {
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+  border-left-color: transparent;
+  bottom: -10px;
+  position: absolute;
+}
+
+.aye_label.top:before {
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-left-color: transparent;
+  top: -10px;
+  position: absolute;
 }
 
 /*# sourceMappingURL=main.css.map */

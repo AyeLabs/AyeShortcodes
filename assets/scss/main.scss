@@ -239,14 +239,70 @@
 
 .aye_label {
 	padding: 4px 8px;
-	
+	position: relative;
+	margin: 3px;
+
 	&:before {
 		content: "";
-		display: block;
 		width: 0;
 		height: 0;
+		border-style: solid;
+		border-color: inherit;
+		border-width: 5px;
+		margin: auto;
+	}
+
+	&.left:before,
+	&.right:before {
+		top: 0; bottom: 0;
+	}
+
+	&.top:before,
+	&.bottom:before {
+		left: 0; right: 0;
 	}
 
 	&.left {
+
+		&:before {
+			border-top-color: transparent;
+			border-bottom-color: transparent;
+			border-left-color: transparent;
+			left: -10px;
+			position: absolute;
+		}
+	}
+
+	&.right {
+
+		&:before {
+			border-top-color: transparent;
+			border-bottom-color: transparent;
+			border-right-color: transparent;
+			right: -10px;
+			position: absolute;
+		}
+	}
+
+	&.bottom {
+
+		&:before {
+			border-bottom-color: transparent;
+			border-right-color: transparent;
+			border-left-color: transparent;
+			bottom: -10px;
+			position: absolute;
+		}
+	}
+
+	&.top {
+
+		&:before {
+			border-top-color: transparent;
+			border-right-color: transparent;
+			border-left-color: transparent;
+			top: -10px;
+			position: absolute;
+		}
 	}
 }

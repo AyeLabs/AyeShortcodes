@@ -310,7 +310,7 @@ class Shortcodes {
 	    $style = ' style="' . 
 	    	(!empty($args['color']) ? 'color: '. esc_attr($args['color']) .';' : '') . 
 	    	(!empty($args['background']) ? 'background-color: '. esc_attr($args['background']) .';' : '') .
-	    	'" ';
+	    	((!empty($args['background']) and !empty($args['arrow'])) ? 'border-color: '. esc_attr($args['background']) .';' : '') . '" ';
 
 	    // Build return
 	    $return = '<span class="'. $class .'"'. $style .'>';

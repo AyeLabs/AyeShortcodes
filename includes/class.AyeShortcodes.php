@@ -378,4 +378,17 @@ class Shortcodes {
 			return '<p class="aye_lead_paragraph">'.$content.'</p>';
 		}
 	}
+
+	static function aye_tooltip($atts, $content = "") {
+		$args = shortcode_atts( array(
+	        "text"			 => ''
+	    ), $atts );
+
+		if(!empty($args['text'])) {
+	    	return '<span class="aye_tooltip" data-tooltip="'. esc_attr($args['text']) .'">'. do_shortcode($content) .'</span>';
+		} else {
+			return do_shortcode($content);
+		}
+	}
+
 }

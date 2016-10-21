@@ -306,3 +306,22 @@
 		}
 	}
 }
+
+.aye_accordion {
+	border: 1px solid #ccc;
+	margin-bottom: 5px;
+
+	.aye_accordion_title {
+		padding: 10px;
+		background: rgba(#ccc, 0.3);
+
+		&.active {
+			font-weight: bold;
+		}
+	}
+
+	.aye_accordion_content {
+		padding: 10px;
+		display: none;
+	}
+}

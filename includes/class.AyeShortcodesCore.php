@@ -18,7 +18,7 @@ class Core {
 
 		// Plugin shortcodes
 		$this->shortcodes_details = array(
-				'basic' => array('column', 'tabs', 'tab', 'button', 'cta'),
+				'basic' => array('column', 'tabs', 'tab', 'button', 'cta', 'accordion'),
 				'charts_and_tables' => array('pricing_title', 'pricing_row', 'progress_bar'),
 				'typography' => array('message_box', 'icon', 'dropcap', 'blockquote', 'label'),
 				'interactive' => array('google_maps', 'ba_slider', 'counter', 'count_down', 'image_mapping', 'timeline')

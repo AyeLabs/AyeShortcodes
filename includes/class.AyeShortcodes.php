@@ -324,4 +324,18 @@ class Shortcodes {
 
 	    return $return;
 	}
+
+	static function aye_accordion($atts, $content = "") {
+		$args = shortcode_atts( array(
+	        "title"			 => '',
+	        "active"		 => ''
+	    ), $atts );
+
+	    if(!empty($args['title'])) {
+	    	return '<div class="aye_accordion">
+	    		<div class="aye_accordion_title'. (!empty($args['active']) ? ' active' : '') .'">'. $args['title'] .'</div><!-- / .aye_accordion_title -->
+	    		<div class="aye_accordion_content"'. (!empty($args['active']) ? ' style="display: block;"' : '') .'>'. do_shortcode($content) .'</div><!-- / .aye_accordion_content -->
+	    	</div><!-- / .aye_accordion -->';
+	    }
+	}
 }

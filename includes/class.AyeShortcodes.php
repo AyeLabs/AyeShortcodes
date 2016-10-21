@@ -356,4 +356,20 @@ class Shortcodes {
 
 		return '<div class="aye_divider_gotop"'. $style .'><span>&#8657; '. __('Back to top', 'ayeshort') .'</span></div><!-- / .aye_divider_gotop -->';
 	}
+
+	static function aye_divider_headline($atts, $content = "") {
+		$args = shortcode_atts( array(
+	        "border_color"			 => '',
+	        "color"			 => '',
+	        "background_color"					 => ''
+	    ), $atts );
+
+	    // Build style
+	   	$style = ' style="' . 
+	    	(!empty($args['border_color']) ? 'border-color: '. esc_attr($args['border_color']) .';' : '') . 
+	    	(!empty($args['color']) ? 'color: '. esc_attr($args['color']) .';' : '') . 
+	    	(!empty($args['background_color']) ? 'background-color: '. esc_attr($args['background_color']) .';' : '') . '" ';
+
+		return '<div class="aye_divider_headline"'. $style .'><span>'. do_shortcode($content) .'</span></div><!-- / .aye_divider_headline -->';
+	}
 }

@@ -1315,4 +1315,43 @@
   text-decoration: underline;
 }
 
+.aye_divider_headline {
+  width: 100%;
+  display: inline-block;
+  position: relative;
+  background-color: #fff;
+  border-color: #ccc;
+}
+
+.aye_divider_headline:before, .aye_divider_headline:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  border-bottom-style: solid;
+  border-bottom-color: inherit;
+  border-bottom-width: 1px;
+  width: 100%;
+  display: block;
+}
+
+.aye_divider_headline:before {
+  top: 40%;
+}
+
+.aye_divider_headline:after {
+  bottom: 40%;
+}
+
+.aye_divider_headline span {
+  background-color: inherit;
+  position: relative;
+  z-index: 2;
+  padding: 0 15px;
+  color: inherit;
+}
+
+.aye_divider_headline p {
+  display: inline;
+}
+
 /*# sourceMappingURL=main.css.map */

@@ -340,3 +340,43 @@
 		text-decoration: underline;
 	}
 }
+
+.aye_divider_headline {
+	width: 100%;
+	display: inline-block;
+	position: relative;
+	background-color: #fff;
+	border-color: #ccc;
+
+	&:before,
+	&:after {
+		content: "";
+		position: absolute;
+		z-index: 1;
+		border-bottom-style: solid;
+		border-bottom-color: inherit;
+		border-bottom-width: 1px;
+		width: 100%;
+		display: block;
+	}
+
+	&:before {
+		top: 40%;
+	}
+
+	&:after {
+		bottom: 40%;
+	}
+
+	span {
+		background-color: inherit;
+		position: relative;
+		z-index: 2;
+		padding: 0 15px;
+		color: inherit;
+	}
+
+	p {
+		display: inline;
+	}
+}

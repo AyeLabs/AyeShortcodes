@@ -372,4 +372,10 @@ class Shortcodes {
 
 		return '<div class="aye_divider_headline"'. $style .'><span>'. do_shortcode($content) .'</span></div><!-- / .aye_divider_headline -->';
 	}
+
+	static function aye_lead_paragraph($atts, $content = "") {
+		if(!empty($content)) {
+			return '<p class="aye_lead_paragraph">'.$content.'</p>';
+		}
+	}
 }

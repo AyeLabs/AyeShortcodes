@@ -54,6 +54,7 @@ module.exports = function(grunt) {
           }
 
         },
+        
 
         makepot: {
           target: {
@@ -77,27 +78,27 @@ module.exports = function(grunt) {
           }
       },
 
-      concat_css: {
-        options: {
-          // Task-specific options go here. 
-        },
-        all: {
-          src: ["assets/css/concat/*.css"],
-          dest: "style.css"
-        },
-      },
+      // concat_css: {
+      //   options: {
+      //     // Task-specific options go here. 
+      //   },
+      //   all: {
+      //     src: ["assets/css/concat/*.css"],
+      //     dest: "style.css"
+      //   },
+      // },
 
-      lineending: {
-        dist: {
-          options: {
-            eol: 'crlf',
-            overwrite: true
-          },
-          files: {
-            '': ['style.css']
-          }
-        }
-      }
+      // lineending: {
+      //   dist: {
+      //     options: {
+      //       eol: 'crlf',
+      //       overwrite: true
+      //     },
+      //     files: {
+      //       '': ['style.css']
+      //     }
+      //   }
+      // }
 
 
     });

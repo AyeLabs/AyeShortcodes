@@ -63,9 +63,10 @@ class Shortcodes {
 		return '<div class="'. esc_attr($class) .'">'. do_shortcode($content) .'</div>';
 	}
 
+	/**
+	 * Creates content tabs wrapper, default size is splitted in 4/8 columns combintion.
+	 */
 	static function aye_tabs($atts, $content = '') {
-		
-
 		$args = shortcode_atts( array(
 	        "orientation"          => 'horizontal'
 	    ), $atts );
@@ -101,6 +102,9 @@ class Shortcodes {
 		return $return;
 	}
 
+	/**
+	 * Creates content tabs
+	 */
 	static function aye_tab($atts, $content = "") {
 		$args = shortcode_atts( array(
 	        "title"          => ''
@@ -115,13 +119,18 @@ class Shortcodes {
 
 	}
 
+	/**
+	 * Generates a button. 
+	 * Target attribute is mark automatcally as _blank is the url is external. 
+	 * You can also specify a post ID and his permalink will be used.
+	 */
 	static function aye_button($atts) {
 		$args = shortcode_atts( array(
 	        "url"          => '',
-	        "label"          => '',
-	        "target"          => '',
-	        "id"          => '',
-	        "icon"          => ''
+	        "label"        => '',
+	        "target"       => '',
+	        "id"           => '',
+	        "icon"         => ''
 	    ), $atts );
 
 	    // Require assets
@@ -154,6 +163,9 @@ class Shortcodes {
     	return '<a class="'. esc_attr($class) .'" '. (empty($target) ? '' : 'target="'. esc_attr($target) .'"').' href="' .esc_url($permalink) .'">'. $args['label'] .'</a>';
 	}
 
+	/**
+	 * Generates a call to action row
+	 */
 	static function aye_cta($atts, $content = "") {
 		$args = shortcode_atts( array(
 	        "position"		=> 'left'
@@ -162,6 +174,10 @@ class Shortcodes {
 		return '<div class="aye_cta '. $args['position'] .'">'. do_shortcode($content) .'</div><!-- / .aye_cta -->';
 	}
 
+	/**
+	 * Generates a pricing table title, containing the title and the price. 
+	 * Should be used inside [aye_column]
+	 */
 	static function aye_pricing_title($atts) {
 		$args = shortcode_atts( array(
 	        "title"          => '',
@@ -171,9 +187,13 @@ class Shortcodes {
 	    return '<div class="aye_pricing_title"><span class="title">'. $args['title'] .'</span><span class="price">'. $args['price'] .'</span></div><!-- / .aye_pricing_title -->';
 	}
 
+	/**
+	 * Generates a pricing row, like a feature the current package offers.
+	 * Should be used inside [aye_column]
+	 */
 	static function aye_pricing_row($atts) {
 		$args = shortcode_atts( array(
-	        "content"          => '',
+	        "content"        => '',
 	        "icon"			 => ''
 	    ), $atts );
 
@@ -185,9 +205,12 @@ class Shortcodes {
 		return '<div class="aye_pricing_row">'. (( $args['icon'] || $args['icon'] === "0" ) ? '<i class="fa fa-'. $args['icon'] . '"></i>' : '') . ' '  . $args['content'] .'</div>';
 	}
 
+	/**
+	 * Generates a progress bar, you cana also add an icon and a label.
+	 */
 	static function aye_progress_bar($atts) {
 		$args = shortcode_atts( array(
-	        "percent"          => 0,
+	        "percent"        => 0,
 	        "icon"			 => '',
 	        "label"			 => ''
 	    ), $atts );
@@ -210,6 +233,10 @@ class Shortcodes {
 		return $return;
 	}
 
+	/**
+	 * Generates an alert message box. 
+	 * Four situation are already hardcoded: error, warning, info, success
+	 */
 	static function aye_message_box($atts) {
 		$args = shortcode_atts( array(
 	        "type"			 => '',
@@ -257,6 +284,9 @@ class Shortcodes {
     	return $return;
 	}
 
+	/**
+	 * Creates a simple inline font-awesome icon
+	 */
 	static function aye_icon($atts) {
 		$args = shortcode_atts( array(
 	        "type"			 => '',
@@ -268,6 +298,9 @@ class Shortcodes {
 	    return '<i class="fa fa-'. esc_attr($args['type']) .'"></i>';
 	}
 
+	/**
+	 * Generates a drop capital
+	 */
 	static function aye_dropcap($atts, $content = "") {
 		$args = shortcode_atts( array(
 	        "color"			 => '',
@@ -291,6 +324,9 @@ class Shortcodes {
 		return '<span'. $style .' class="aye_dropcap">'. do_shortcode($content) .'</span>';
 	}
 
+	/**
+	 * Generates a blockquote text with special design
+	 */
 	static function aye_blockquote($atts, $content = "") {
 		$args = shortcode_atts( array(
 	        "position"			 => 'left',
@@ -309,12 +345,15 @@ class Shortcodes {
 		return $return;
 	}
 
+	/**
+	 * Generates a text label with custom icon, background color, text color or an arrow available on all sides.
+	 */
 	static function aye_label($atts) {
 		$args = shortcode_atts( array(
 	        "icon"			 => '',
 	        "background"	 => 'tomato',
-	        "label"	 => 'tomato',
-	        "arrow"	 => '',
+	        "label"	  		 => 'tomato',
+	        "arrow"	 		 => '',
 	        "color"			 => 'white'
 	    ), $atts );
 
@@ -347,6 +386,9 @@ class Shortcodes {
 	    return $return;
 	}
 
+	/**
+	 * Creates an accordion content slider
+	 */
 	static function aye_accordion($atts, $content = "") {
 		$args = shortcode_atts( array(
 	        "title"			 => '',
@@ -361,12 +403,15 @@ class Shortcodes {
 	    }
 	}
 	
+	/**
+	 * Creates a divider with a "Back to top" link
+	 */
 	static function aye_divider_gotop($atts) {
 		$args = shortcode_atts( array(
 	        "border_color"			 => '',
 	        "border_height"			 => '',
 	        "color"					 => '',
-	        "margin"		 => ''
+	        "margin"		 		 => ''
 	    ), $atts );
 
 	   	// Build style
@@ -379,11 +424,15 @@ class Shortcodes {
 		return '<div class="aye_divider_gotop"'. $style .'><span>&#8657; '. __('Back to top', 'ayeshort') .'</span></div><!-- / .aye_divider_gotop -->';
 	}
 
+	/**
+	 * Creates a special headline divider. Use inside of this shortcode an heading tag (h1-h6).
+	 * Margins will be defined by the heading style.
+	 */
 	static function aye_divider_headline($atts, $content = "") {
 		$args = shortcode_atts( array(
 	        "border_color"			 => '',
-	        "color"			 => '',
-	        "background_color"					 => ''
+	        "color"			    	 => '',
+	        "background_color"		 => ''
 	    ), $atts );
 
 	    // Build style
@@ -395,12 +444,18 @@ class Shortcodes {
 		return '<div class="aye_divider_headline"'. $style .'><span>'. do_shortcode($content) .'</span></div><!-- / .aye_divider_headline -->';
 	}
 
+	/**
+	 * Transforms a normal paragraph in a lead paragraph https://en.wikipedia.org/wiki/Lead_paragraph.
+	 */
 	static function aye_lead_paragraph($atts, $content = "") {
 		if(!empty($content)) {
 			return '<p class="aye_lead_paragraph">'.$content.'</p>';
 		}
 	}
 
+	/**
+	 * Creates a tooltip on selected element/content.
+	 */
 	static function aye_tooltip($atts, $content = "") {
 		$args = shortcode_atts( array(
 	        "text"			 => ''
@@ -413,6 +468,9 @@ class Shortcodes {
 		}
 	}
 
+	/**
+	 * Apply the specified font to the selected content. Font is loaded only on page where the shortcode is used.
+	 */
 	static function aye_google_font($atts, $content = "") {
 		$args = shortcode_atts( array(
 	        "font"			 => '',
@@ -436,6 +494,9 @@ class Shortcodes {
 		}
 	}
 
+	/**
+	 * Creates a before/after images slider.
+	 */
 	static function aye_before_after($atts) {
 		$args = shortcode_atts( array(
 	        "before"			 => '',
@@ -451,12 +512,15 @@ class Shortcodes {
 	    }
 	}
 
+	/**
+	 * Generates a number counter
+	 */
 	static function aye_counter($atts) {
 		$args = shortcode_atts( array(
 	        "from"			 => '0',
-	        "to"		 		 => '0',
-	        "speed"		 		 => '',
-	        "refresh"		 		 => ''
+	        "to"		 	 => '0',
+	        "speed"		     => '',
+	        "refresh"		 => ''
 	    ), $atts );
 
 		$this->assets->loadScript('countTo');

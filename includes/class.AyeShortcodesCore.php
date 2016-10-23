@@ -13,17 +13,20 @@ class Core {
 	// Load shortcodes
 	public $shortcodes;
 
+	// If theme mod is used, set this to true using 'aye_shortcodes_theme_mode' filter
+	protected $theme_mode;
+
 	function __construct() {
 		$this->shortcodes = new Shortcodes();
 
+
 		// Plugin shortcodes
 		$this->shortcodes_details = array(
-				'basic' => array('column', 'tabs', 'tab', 'accordion', 'simple_button', 'icon_button', 'cta'),
-				'charts_and_tables' => array('pricing', 'progress_bar'),
-				'typography' => array('message_box', 'icon_list', 'icon_header', 'dropcap', 'blockquote'),
-				'interactive' => array('google_maps', 'ba_slider', 'counter', 'count_down', 'image_mapping', 'timeline')
+				'basic' => array('column', 'tabs', 'tab', 'button', 'cta', 'accordion'),
+				'charts_and_tables' => array('pricing_title', 'pricing_row', 'progress_bar'),
+				'typography' => array('message_box', 'icon', 'dropcap', 'blockquote', 'label', 'lead_paragraph', 'tooltip', 'google_font', 'divider_headline'),
+				'interactive' => array('divider_gotop', 'before_after', 'counter')
 			);
-
 		add_action( 'init', array( $this, 'pluginInit') );
 	}
 
@@ -31,8 +34,16 @@ class Core {
 	 * init plugin after constructor and after theme is ready
 	 */
 	public function pluginInit() {
+
+		// By default all shortcodes are available in the plugin, themes developers can filter this
 		$this->shortcodes_available = apply_filters('aye_shortcodes_available_filter', $this->getAvailableShortcodes());
+
+		// Set theme mode to false and apply filters
+		$this->theme_mode = apply_filters('aye_shortcodes_theme_mode', false);
+
+		// Register all enabled and available shortcodes
 		$this->registerShortcodes();
+
 	}
 
 	/**

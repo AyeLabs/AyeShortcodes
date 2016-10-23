@@ -15,5 +15,9 @@
     "assets/libs",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "font-awesome": "fontawesome#^4.6.3",
+    "jquery-countTo": "^1.2.0"
+  }
 }

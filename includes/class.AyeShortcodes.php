@@ -60,7 +60,7 @@ class Shortcodes {
 		$class .= ( $args['pricing_table'] || $args['pricing_table'] === "0" ) ? ' aye_pricing_table '. $args['pricing_table'] : '';
 		$class .= ( $args['pricing_highlighted'] || $args['pricing_highlighted'] === "0" ) ? ' aye_pricing_highlighted' : '';
 
-		return '<div class="'. $class .'">'. do_shortcode($content) .'</div>';
+		return '<div class="'. esc_attr($class) .'">'. do_shortcode($content) .'</div>';
 	}
 
 	static function aye_tabs($atts, $content = '') {

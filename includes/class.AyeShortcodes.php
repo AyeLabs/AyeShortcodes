@@ -5,13 +5,16 @@ namespace Aye\Shortcodes;
 class Shortcodes {
 	private $tab_titles = array();
 
-	// Load assets
+	// Load assets Class
 	public $assets;
 
 	public function __construct() {
 		$this->assets = new Assets();
 	}
 
+	/**
+	 * Create column with content inside using Bootstrap column system
+	 */
 	static function aye_column($atts, $content = '') {
 		$args = shortcode_atts( array(
 	        "lg"          => '',
@@ -33,6 +36,9 @@ class Shortcodes {
             "pricing_table"   => '',
             "pricing_highlighted"   => '',
 	    ), $atts );
+
+	    // Require assets
+	    $this->assets->loadStyle('bootstrap-columns');
 
 	    $class  = '';
 		$class .= ( $args['lg'] )                                      ? ' col-lg-'. $args['lg'] : '';
@@ -58,7 +64,6 @@ class Shortcodes {
 	}
 
 	static function aye_tabs($atts, $content = '') {
-		// array_push(self::$assets, __FUNCTION__);
 		
 
 		$args = shortcode_atts( array(
@@ -119,7 +124,7 @@ class Shortcodes {
 	        "icon"          => ''
 	    ), $atts );
 
-	    // Require scripts
+	    // Require assets
 	    $this->assets->loadStyle('fontawesome');
 
 		// Build class
@@ -172,7 +177,7 @@ class Shortcodes {
 	        "icon"			 => ''
 	    ), $atts );
 
-	    // Require scripts
+	    // Require assets
 	    $this->assets->loadStyle('fontawesome');
 
 	    $class = "aye_pricing_row";
@@ -187,7 +192,7 @@ class Shortcodes {
 	        "label"			 => ''
 	    ), $atts );
 
-		// Require scripts
+		// Require assets
 	    $this->assets->loadStyle('fontawesome');
 
 		$return = '<div class="aye_progress_bar"><div class="loading" style="width: '. esc_attr($args['percent']) .'%;"></div><!-- / .loading -->';
@@ -214,7 +219,7 @@ class Shortcodes {
 	        "background"	 => ''
 	    ), $atts );
 	    
-	    // Require scripts
+	    // Require assets
 	    $this->assets->loadStyle('fontawesome');
 
     	// Set defaults
@@ -257,7 +262,7 @@ class Shortcodes {
 	        "type"			 => '',
 	    ), $atts );
 
-		// Require scripts
+		// Require assets
 	    $this->assets->loadStyle('fontawesome');
 
 	    return '<i class="fa fa-'. esc_attr($args['type']) .'"></i>';
@@ -313,7 +318,7 @@ class Shortcodes {
 	        "color"			 => 'white'
 	    ), $atts );
 
-		// Require scripts
+		// Require assets
 	    $this->assets->loadStyle('fontawesome');
 
 		// Build class
@@ -455,7 +460,7 @@ class Shortcodes {
 	    ), $atts );
 
 		$this->assets->loadScript('countTo');
-		
+
 		return '<span class="aye_counter" data-from="'.$args['from'].'" data-to="'.$args['to'].'"
 		'. (!empty($args['speed']) ? 'data-speed="'. $args['speed'] .'"' : '') . '></span><!-- / .aye_counter -->';
 	}

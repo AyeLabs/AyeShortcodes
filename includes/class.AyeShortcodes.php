@@ -301,7 +301,7 @@ class Shortcodes {
 	/**
 	 * Generates a drop capital
 	 */
-	static function aye_dropcap($atts, $content = "") {
+	static function aye_drop_capital($atts, $content = "") {
 		$args = shortcode_atts( array(
 	        "color"			 => '',
 	        "font"			 => ''
@@ -321,7 +321,7 @@ class Shortcodes {
 		    $style .= '" ';
 		}
 
-		return '<span'. $style .' class="aye_dropcap">'. do_shortcode($content) .'</span>';
+		return '<span'. $style .' class="aye_drop_capital">'. do_shortcode($content) .'</span>';
 	}
 
 	/**

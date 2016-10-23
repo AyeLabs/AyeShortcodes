@@ -316,7 +316,7 @@ class Shortcodes {
 
 		// Require scripts
 	    $this->assets->loadStyle('fontawesome');
-	    
+
 		// Build class
 	    $class = "aye_label";
 	    if(!empty($args['arrow'])) {
@@ -412,9 +412,26 @@ class Shortcodes {
 	static function aye_google_font($atts, $content = "") {
 		$args = shortcode_atts( array(
 	        "font"			 => '',
-	        "style"		 => ''
+	        "weight"		 => ''
 	    ), $atts );
 
+		// Build font query
+		$query = 
+		(!empty($args['font']) ? str_replace(' ', '+', $args['font']) .':' : '') . $args['weight'] . 
+		(in_array('italic', $atts) ? 'i' : '');
+
+		var_dump($query);
+
+		// Build style
+		$style = 
+				(!empty($args['font']) ? 'font-family: ' . $args['font'] . ';' : '') . 
+				(!empty($args['weight']) ? 'font-weight: ' . $args['weight'] . ';' : '') . 
+				(in_array('italic', $atts) ? 'font-style: italic;' : '');
+
+		if(!empty($query)) {
+			wp_enqueue_style( str_replace(' ', '_', $args['font']),  '//fonts.googleapis.com/css?family=' . $query );
+			return '<span style="'. $style .'">'.do_shortcode($content).'</span>';
+		}
 
 	}
 

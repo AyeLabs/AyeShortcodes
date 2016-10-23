@@ -59,7 +59,6 @@ class Shortcodes {
 
 	static function aye_tabs($atts, $content = '') {
 		// array_push(self::$assets, __FUNCTION__);
-		wp_enqueue_script( 'ayeshortcode', PLUGIN_URL . 'assets/js/scripts.js', array('jquery') );
 		
 
 		$args = shortcode_atts( array(
@@ -445,6 +444,20 @@ class Shortcodes {
 	    				<div class="border" style="left: 50%;"></div><!-- / .border -->
 	    			</div><!-- / .aye_before_after -->';
 	    }
+	}
+
+	static function aye_counter($atts) {
+		$args = shortcode_atts( array(
+	        "from"			 => '0',
+	        "to"		 		 => '0',
+	        "speed"		 		 => '',
+	        "refresh"		 		 => ''
+	    ), $atts );
+
+		$this->assets->loadScript('countTo');
+		
+		return '<span class="aye_counter" data-from="'.$args['from'].'" data-to="'.$args['to'].'"
+		'. (!empty($args['speed']) ? 'data-speed="'. $args['speed'] .'"' : '') . '></span><!-- / .aye_counter -->';
 	}
 
 }

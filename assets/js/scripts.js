@@ -46,4 +46,7 @@ jQuery(document).ready(function($) {
 		$('.aye_before_after .border').css('left', Math.ceil((event.offsetX * 100 / $('.aye_before_after').width())) + '%');
 	});
 
+	// Aye Counter
+	$('.aye_counter').countTo();
+
 });

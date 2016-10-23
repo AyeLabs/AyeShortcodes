@@ -31,12 +31,18 @@ class Assets {
 	 * Register assets that later will be enqueued by each shortcode
 	 */
 	public function registerAssets() {
-		wp_register_style( 'fontawesome', PLUGIN_URL . 'assets/libs/font-awesome/css/font-awesome.min.css' );
+		wp_register_style( 'fontawesome', PLUGIN_URL . 'assets/libs/font-awesome/css/font-awesome.min.css', array('ayeshortcode'), '4.6.3' );
+
+
+		wp_register_script( 'countTo', PLUGIN_URL . 'assets/libs/jquery-countTo/jquery.countTo.js', array('jquery', 'ayeshortcode'), '1.0', true );
+		wp_register_script( 'ayeshortcode', PLUGIN_URL . 'assets/js/scripts.js', array('jquery') );
+
 	}
 
 	// Temporary
 	public function loadAssets() {
-		wp_enqueue_style( 'bootstrap', PLUGIN_URL . 'assets/css/main.min.css' );
+		wp_enqueue_style( 'ayeshortcode', PLUGIN_URL . 'assets/css/main.min.css' );
+		wp_enqueue_script( 'ayeshortcode' );
 	}
 
 	/**

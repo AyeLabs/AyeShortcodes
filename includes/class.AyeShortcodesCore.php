@@ -24,8 +24,8 @@ class Core {
 		$this->shortcodes_details = array(
 				'basic' => array('column', 'tabs', 'tab', 'button', 'cta', 'accordion'),
 				'charts_and_tables' => array('pricing_title', 'pricing_row', 'progress_bar'),
-				'typography' => array('message_box', 'icon', 'dropcap', 'blockquote', 'label', 'lead_paragraph', 'tooltip', 'google_font'),
-				'interactive' => array('divider_gotop', 'divider_headline', 'google_maps', 'ba_slider', 'counter', 'count_down', 'image_mapping', 'timeline')
+				'typography' => array('message_box', 'icon', 'dropcap', 'blockquote', 'label', 'lead_paragraph', 'tooltip', 'google_font', 'divider_headline'),
+				'interactive' => array('divider_gotop', 'before_after')
 			);
 		add_action( 'init', array( $this, 'pluginInit') );
 	}

@@ -1408,4 +1408,40 @@
   margin: auto;
 }
 
+.aye_before_after {
+  width: 100%;
+  position: relative;
+}
+
+.aye_before_after:hover {
+  cursor: col-resize;
+}
+
+.aye_before_after .before,
+.aye_before_after .after {
+  position: absolute;
+  overflow: hidden;
+}
+
+.aye_before_after img {
+  width: 100%;
+  max-width: inherit;
+}
+
+.aye_before_after .before {
+  z-index: 1;
+}
+
+.aye_before_after .after {
+  z-index: 2;
+}
+
+.aye_before_after .border {
+  z-index: 3;
+  height: 100%;
+  position: absolute;
+  border: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+}
+
 /*# sourceMappingURL=main.css.map */

@@ -420,8 +420,6 @@ class Shortcodes {
 		(!empty($args['font']) ? str_replace(' ', '+', $args['font']) .':' : '') . $args['weight'] . 
 		(in_array('italic', $atts) ? 'i' : '');
 
-		var_dump($query);
-
 		// Build style
 		$style = 
 				(!empty($args['font']) ? 'font-family: ' . $args['font'] . ';' : '') . 
@@ -432,7 +430,21 @@ class Shortcodes {
 			wp_enqueue_style( str_replace(' ', '_', $args['font']),  '//fonts.googleapis.com/css?family=' . $query );
 			return '<span style="'. $style .'">'.do_shortcode($content).'</span>';
 		}
+	}
 
+	static function aye_before_after($atts) {
+		$args = shortcode_atts( array(
+	        "before"			 => '',
+	        "after"		 		 => ''
+	    ), $atts );
+
+	    if(!empty($args['before']) and !empty($args['after'])) {
+	    	return '<div class="aye_before_after">
+	    				<div class="after"><img src="'. esc_url($args['after']) .'" /></div>
+	    				<div class="before"><img src="'. esc_url($args['before']) .'" /></div>
+	    				<div class="border" style="left: 50%;"></div><!-- / .border -->
+	    			</div><!-- / .aye_before_after -->';
+	    }
 	}
 
 }

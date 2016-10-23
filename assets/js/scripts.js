@@ -26,4 +26,24 @@ jQuery(document).ready(function($) {
 	$('.aye_divider_gotop').click(function() {
 		$('body, html').animate({ scrollTop: 0});
 	});
+
+	// Before after
+	$(window).on('resize', function() {
+		var aye_before_after_heights = [];
+		$('.aye_before_after img').each(function(x, y) {
+			aye_before_after_heights.push($(y).height());
+			$(y).css({
+				'width': $(y).width(),
+				'height': $(y).height()
+			});
+		});
+		$('.aye_before_after').css('height', Math.max(...aye_before_after_heights));
+		$('.aye_before_after .after').css('width', '50%');
+	}).trigger('resize');
+
+	$('.aye_before_after').on('mousemove', function(event) {
+		$('.aye_before_after .after').css('width', Math.ceil((event.offsetX * 100 / $('.aye_before_after').width())) + '%');
+		$('.aye_before_after .border').css('left', Math.ceil((event.offsetX * 100 / $('.aye_before_after').width())) + '%');
+	});
+
 });

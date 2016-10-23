@@ -435,3 +435,39 @@
 		margin: auto;
 	}
 }
+
+.aye_before_after {
+	width: 100%;
+	position: relative;
+
+	&:hover {
+		cursor: col-resize;
+	}
+
+	.before,
+	.after {
+		position: absolute;
+		overflow: hidden;
+	}
+
+	img {
+		width: 100%;
+		max-width: inherit;
+	}
+
+	.before {
+		z-index: 1;
+	}
+
+	.after {
+		z-index: 2;
+	}
+
+	.border {
+		z-index: 3;
+		height: 100%;
+		position: absolute;
+		border: none;
+		box-shadow: 0 0 0 2px rgba(white, 0.4);
+	}
+}

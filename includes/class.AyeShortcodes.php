@@ -5,15 +5,11 @@ namespace Aye\Shortcodes;
 class Shortcodes {
 	private $tab_titles = array();
 
-	function __construct() {
-		add_action( 'init', array( $this, 'loadAssets') );
+	// Load assets
+	public $assets;
 
-	}
-
-	public function loadAssets() {
-		wp_enqueue_style( 'bootstrap', PLUGIN_URL . 'assets/css/main.min.css' );
-		wp_enqueue_style( 'fontawesome', PLUGIN_URL . 'assets/libs/font-awesome/css/font-awesome.min.css' );
-		wp_enqueue_script( 'ayeshortcode', PLUGIN_URL . 'assets/js/scripts.js', array('jquery') );
+	public function __construct() {
+		$this->assets = new Assets();
 	}
 
 	static function aye_column($atts, $content = '') {
@@ -62,6 +58,10 @@ class Shortcodes {
 	}
 
 	static function aye_tabs($atts, $content = '') {
+		// array_push(self::$assets, __FUNCTION__);
+		wp_enqueue_script( 'ayeshortcode', PLUGIN_URL . 'assets/js/scripts.js', array('jquery') );
+		
+
 		$args = shortcode_atts( array(
 	        "orientation"          => 'horizontal'
 	    ), $atts );
@@ -119,6 +119,9 @@ class Shortcodes {
 	        "id"          => '',
 	        "icon"          => ''
 	    ), $atts );
+
+	    // Require scripts
+	    $this->assets->loadStyle('fontawesome');
 
 		// Build class
 	    $class = "aye_button";
@@ -389,6 +392,15 @@ class Shortcodes {
 		} else {
 			return do_shortcode($content);
 		}
+	}
+
+	static function aye_google_font($atts, $content = "") {
+		$args = shortcode_atts( array(
+	        "font"			 => '',
+	        "style"		 => ''
+	    ), $atts );
+
+
 	}
 
 }

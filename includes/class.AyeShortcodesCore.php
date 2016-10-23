@@ -13,8 +13,16 @@ class Core {
 	// Load shortcodes
 	public $shortcodes;
 
+	// If theme mod is used, set this to true using 'aye_shortcodes_theme_mode' filter
+	protected $theme_mode;
+
+	// Load assets
+	public $assets;
+
 	function __construct() {
 		$this->shortcodes = new Shortcodes();
+		$this->assets = new Assets();
+
 
 		// Plugin shortcodes
 		$this->shortcodes_details = array(
@@ -30,8 +38,17 @@ class Core {
 	 * init plugin after constructor and after theme is ready
 	 */
 	public function pluginInit() {
+
+		// By default all shortcodes are available in the plugin, themes developers can filter this
 		$this->shortcodes_available = apply_filters('aye_shortcodes_available_filter', $this->getAvailableShortcodes());
+
+		// Set theme mode to false and apply filters
+		$this->theme_mode = apply_filters('aye_shortcodes_theme_mode', false);
+
+		// Register all enabled and available shortcodes
 		$this->registerShortcodes();
+
+		var_dump($this->theme_mode);
 	}
 
 	/**

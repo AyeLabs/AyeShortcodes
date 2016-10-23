@@ -15,6 +15,7 @@ define('PLUGIN_PATH', plugin_dir_path( __FILE__ ));
 
 require_once PLUGIN_PATH . 'includes/class.AyeShortcodesCore.php';
 require_once PLUGIN_PATH . 'includes/class.AyeShortcodes.php';
+require_once PLUGIN_PATH . 'includes/class.AyeShortcodes.Assets.php';
 $aye_shortcodes = new \Aye\Shortcodes\Core();
 
 register_activation_hook( __FILE__, array( '\Aye\Shortcodes\Core()', 'activationHook' ) );

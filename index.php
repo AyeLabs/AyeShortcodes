@@ -2,8 +2,8 @@
 /*
 	Plugin Name: AyeShortcodes
 	Plugin URI: http://ayelabs.com
-	Description: Cleand design and helpful shortcodes, also a companion plugin for all themes available at AyeLabs.
-	Version: 0.0.1
+	Description: Helpful shortcodes with clean design, also a companion plugin for all themes available at AyeLabs. Build with developers and performance in mind.
+	Version: 0.1-alpha
 	Author: Hapiuc Robert, AyeLabs
 	Author URI: http://ayelabs.com
 	License: GPL

@@ -54,7 +54,14 @@ module.exports = function(grunt) {
           }
 
         },
-        
+
+        uglify: {
+          my_target: {
+            files: {
+              'assets/js/scripts.min.js': ['assets/js/scripts.js']
+            }
+          }
+        },
 
         makepot: {
           target: {

@@ -28,6 +28,7 @@ jQuery(document).ready(function($) {
 	});
 
 	// Before after
+
 	$(window).on('resize', function() {
 		var aye_before_after_heights = [];
 		$('.aye_before_after img').each(function(x, y) {
@@ -37,7 +38,7 @@ jQuery(document).ready(function($) {
 				'height': $(y).height()
 			});
 		});
-		$('.aye_before_after').css('height', Math.max(...aye_before_after_heights));
+		$('.aye_before_after').css('height', Math.max.apply(null, aye_before_after_heights));
 		$('.aye_before_after .after').css('width', '50%');
 	}).trigger('resize');
 

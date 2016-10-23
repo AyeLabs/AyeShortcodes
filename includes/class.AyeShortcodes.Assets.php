@@ -38,7 +38,7 @@ class Assets {
 
 		// Scripts
 		wp_register_script( 'countTo', PLUGIN_URL . 'assets/libs/jquery-countTo/jquery.countTo.js', array('jquery', 'ayeshortcode'), '1.0', true );
-		wp_register_script( 'ayeshortcode', PLUGIN_URL . 'assets/js/scripts.js', array('jquery') );
+		wp_register_script( 'ayeshortcode', PLUGIN_URL . 'assets/js/scripts.min.js', array('jquery') );
 
 	}
 

@@ -16,12 +16,8 @@ class Core {
 	// If theme mod is used, set this to true using 'aye_shortcodes_theme_mode' filter
 	protected $theme_mode;
 
-	// Load assets
-	public $assets;
-
 	function __construct() {
 		$this->shortcodes = new Shortcodes();
-		$this->assets = new Assets();
 
 
 		// Plugin shortcodes
@@ -48,7 +44,6 @@ class Core {
 		// Register all enabled and available shortcodes
 		$this->registerShortcodes();
 
-		var_dump($this->theme_mode);
 	}
 
 	/**

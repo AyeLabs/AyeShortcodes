@@ -40,7 +40,18 @@ class Assets {
 	}
 
 	/**
-	 * Use this method to load an style asset on shortcodes methods.
+	 * Use this method to load more style assets on shortcode methods.
+	 */
+	public function loadStyles($assets) {
+		foreach($assets as $asset) {
+			if(!in_array($asset, $this->styles_assets)) {
+				wp_enqueue_style($asset);
+			}
+		}
+	}
+
+	/**
+	 * Use this method to load a style asset on shortcode methods.
 	 */
 	public function loadStyle($asset) {
 		if(!in_array($asset, $this->styles_assets)) {
@@ -49,12 +60,24 @@ class Assets {
 	}
 
 	/**
-	 * Use this method to load an style asset on shortcodes methods.
+	 * Use this method to load more script assets on shortcode methods.
+	 */
+	public function loadScripts($assets) {
+		foreach($assets as $asset) {
+			if(!in_array($asset, $this->scripts_assets)) {
+				wp_enqueue_script($asset);
+			}
+		}
+	}
+
+	/**
+	 * Use this method to load a script asset on shortcode methods.
 	 */
 	public function loadScript($asset) {
 		if(!in_array($asset, $this->scripts_assets)) {
 			wp_enqueue_script($asset);
 		}
 	}
+
 
 }

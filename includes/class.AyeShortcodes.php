@@ -173,6 +173,9 @@ class Shortcodes {
 	        "icon"			 => ''
 	    ), $atts );
 
+	    // Require scripts
+	    $this->assets->loadStyle('fontawesome');
+
 	    $class = "aye_pricing_row";
 
 		return '<div class="aye_pricing_row">'. (( $args['icon'] || $args['icon'] === "0" ) ? '<i class="fa fa-'. $args['icon'] . '"></i>' : '') . ' '  . $args['content'] .'</div>';
@@ -184,6 +187,9 @@ class Shortcodes {
 	        "icon"			 => '',
 	        "label"			 => ''
 	    ), $atts );
+
+		// Require scripts
+	    $this->assets->loadStyle('fontawesome');
 
 		$return = '<div class="aye_progress_bar"><div class="loading" style="width: '. esc_attr($args['percent']) .'%;"></div><!-- / .loading -->';
 
@@ -209,6 +215,9 @@ class Shortcodes {
 	        "background"	 => ''
 	    ), $atts );
 	    
+	    // Require scripts
+	    $this->assets->loadStyle('fontawesome');
+
     	// Set defaults
 	    $icon = ( $args['icon'] ) ? $args['icon'] : '';
 	    $background = ( $args['background'] ) ? $args['background'] : '#DDD';
@@ -248,6 +257,9 @@ class Shortcodes {
 		$args = shortcode_atts( array(
 	        "type"			 => '',
 	    ), $atts );
+
+		// Require scripts
+	    $this->assets->loadStyle('fontawesome');
 
 	    return '<i class="fa fa-'. esc_attr($args['type']) .'"></i>';
 	}
@@ -302,6 +314,9 @@ class Shortcodes {
 	        "color"			 => 'white'
 	    ), $atts );
 
+		// Require scripts
+	    $this->assets->loadStyle('fontawesome');
+	    
 		// Build class
 	    $class = "aye_label";
 	    if(!empty($args['arrow'])) {

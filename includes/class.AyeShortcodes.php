@@ -138,7 +138,7 @@ class Shortcodes {
 	        "set"         => 'fontawesome'
 	    ), $atts );
 
-	    // Get icon
+	    // Require icon
 	    if(!empty($args['icon'])) {
 	    	$icon = $this->helpers->getIcon($args['set'], $args['icon']);
 		}
@@ -197,15 +197,16 @@ class Shortcodes {
 	static function aye_pricing_row($atts) {
 		$args = shortcode_atts( array(
 	        "content"        => '',
-	        "icon"			 => ''
+	        "icon"			 => '',
+	        'set'			 => 'fontawesome'
 	    ), $atts );
 
-	    // Require assets
-	    $this->assets->loadStyle('fontawesome');
+	    // Require Icon
+	    if(!empty($args['icon'])) {
+	    	$icon = $this->helpers->getIcon($args['set'], $args['icon']);
+		}
 
-	    $class = "aye_pricing_row";
-
-		return '<div class="aye_pricing_row">'. (( $args['icon'] || $args['icon'] === "0" ) ? '<i class="fa fa-'. $args['icon'] . '"></i>' : '') . ' '  . $args['content'] .'</div>';
+		return '<div class="aye_pricing_row">'. (isset($icon) ? $icon : '') .' '. $args['content'] .'</div>';
 	}
 
 	/**
@@ -215,16 +216,15 @@ class Shortcodes {
 		$args = shortcode_atts( array(
 	        "percent"        => 0,
 	        "icon"			 => '',
+	        "set"			 => 'fontawesome',
 	        "label"			 => ''
 	    ), $atts );
 
-		// Require assets
-	    $this->assets->loadStyle('fontawesome');
-
 		$return = '<div class="aye_progress_bar"><div class="loading" style="width: '. esc_attr($args['percent']) .'%;"></div><!-- / .loading -->';
 
+		// Require Icon
 		if(!empty($args['icon'])) {
-			$return .= '<i class="fa fa-'. esc_attr($args['icon']) .'"></i>';
+			$return .= $this->helpers->getIcon($args['set'], $args['icon']);
 		}
 
 		if(!empty($args['label'])) {
@@ -245,15 +245,13 @@ class Shortcodes {
 	        "type"			 => '',
 	        "text"			 => '',
 	        "icon"			 => '',
+	        "set"			 => 'fontawesome',
 	        "color"			 => '',
 	        "background"	 => ''
 	    ), $atts );
-	    
-	    // Require assets
-	    $this->assets->loadStyle('fontawesome');
 
     	// Set defaults
-	    $icon = ( $args['icon'] ) ? $args['icon'] : '';
+	    $icon = ( $args['icon'] ) ? $this->helpers->getIcon($args['set'], $args['icon']) : '';
 	    $background = ( $args['background'] ) ? $args['background'] : '#DDD';
 	    $color = ( $args['color'] ) ? $args['color'] : '';
 
@@ -261,25 +259,25 @@ class Shortcodes {
     	if("error" == $args['type']) {
     		$background = '#FF6347';
     		$color = '#FFF';
-    		$icon = 'ban';
+    		$icon = $this->helpers->getIcon($args['set'], 'ban');
     	} elseif("warning" == $args['type']) {
     		$background = '#FF8E47';
     		$color = '#FFF';
-    		$icon = 'exclamation-triangle';
+    		$icon = $this->helpers->getIcon($args['set'], 'exclamation-triangle');
     	} elseif("info" == $args['type']) {
     		$background = '#007acc';
     		$color = '#FFF';
-    		$icon = 'info-circle';
+    		$icon = $this->helpers->getIcon($args['set'], 'info-circle');
     	} elseif("success" == $args['type']) {
     		$background = '#1CFF8B';
     		$color = '#FFF';
-    		$icon = 'check';
+    		$icon = $this->helpers->getIcon($args['set'], 'check');
     	}
 
     	$return = '<div class="aye_message_box '. $args['type'] .'" style="color: '. esc_attr($color) .'; background-color: '. esc_attr($background) .';">';
 
-    	if(!empty($icon)) {
-    		$return .= '<i class="fa fa-'. esc_attr($icon) .'"></i> ';
+    	if(!empty($args['icon'])) {
+    		$return .= $icon;
     	}
 
     	$return .= $args['text'] . '</div>';
@@ -352,6 +350,7 @@ class Shortcodes {
 	static function aye_label($atts) {
 		$args = shortcode_atts( array(
 	        "icon"			 => '',
+	        "set"			 => '',
 	        "background"	 => 'tomato',
 	        "label"	  		 => 'tomato',
 	        "arrow"	 		 => '',
@@ -379,7 +378,7 @@ class Shortcodes {
 
 	    // Add icon
 	    if(!empty($args['icon'])) {
-	    	$return .= '<i class="fa fa-' . $args['icon'] . '"></i> ';
+	    	$return .= $this->helpers->getIcon($args['set'], $args['icon']);
 	    }
 
 	    $return .= esc_html($args['label']) .'</span>';

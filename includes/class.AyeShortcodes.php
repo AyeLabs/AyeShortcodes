@@ -134,17 +134,14 @@ class Shortcodes {
 	        "label"        => '',
 	        "target"       => '',
 	        "id"           => '',
-	        "icon"         => ''
+	        "icon"         => '',
+	        "set"         => 'fontawesome'
 	    ), $atts );
 
-	    // Require assets
-	    $this->assets->loadStyle('fontawesome');
-
-		// Build class
-	    $class = "aye_button";
+	    // Get icon
 	    if(!empty($args['icon'])) {
-	    	$class .= ' fa fa-' . $args['icon'];
-	    }
+	    	$icon = $this->helpers->getIcon($args['set'], $args['icon']);
+		}
 
 	    // Get permalink if id it's used
 	    $permalink = $args['url'];
@@ -164,7 +161,7 @@ class Shortcodes {
     		$target = '';
     	}
 
-    	return '<a class="'. esc_attr($class) .'" '. (empty($target) ? '' : 'target="'. esc_attr($target) .'"').' href="' .esc_url($permalink) .'">'. $args['label'] .'</a>';
+    	return '<a class="aye_button" '. (empty($target) ? '' : 'target="'. esc_attr($target) .'"').' href="'. esc_url($permalink) .'">'. (isset($icon) ? $icon : '') .' '. $args['label'] .'</a>';
 	}
 
 	/**

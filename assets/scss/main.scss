@@ -18,8 +18,7 @@
 }
 
 // Buttons
-.aye_button,
-.aye_button.fa {
+.aye_button {
 	display: inline-block;
 	line-height: 36px;
 	background: #007acc;
@@ -31,20 +30,16 @@
 	text-decoration: none;
 	box-shadow: none;
 
+	.fa {
+		padding-right: 7px;
+	}
+
 	&:hover {
 		opacity: 0.8;
 		color: #fff;
 	}
 }
 
-.aye_button.fa {
-	padding-left: 45px;
-
-	&:before {
-		left: 15px;
-		position: absolute;
-	}
-}
 
 // CTA Row
 .aye_cta {
@@ -89,6 +84,7 @@
 		border-width: 2px;
 		border-style: solid;
 		border-color: inherit;
+		box-shadow: none;
 		color: inherit;
 	}
 }

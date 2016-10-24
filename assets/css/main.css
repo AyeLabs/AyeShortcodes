@@ -11,8 +11,7 @@
   font-weight: bold;
 }
 
-.aye_button,
-.aye_button.fa {
+.aye_button {
   display: inline-block;
   line-height: 36px;
   background: #007acc;
@@ -25,19 +24,13 @@
   box-shadow: none;
 }
 
-.aye_button:hover,
-.aye_button.fa:hover {
+.aye_button .fa {
+  padding-right: 7px;
+}
+
+.aye_button:hover {
   opacity: 0.8;
   color: #fff;
-}
-
-.aye_button.fa {
-  padding-left: 45px;
-}
-
-.aye_button.fa:before {
-  left: 15px;
-  position: absolute;
 }
 
 .aye_cta {
@@ -77,6 +70,7 @@
   border-width: 2px;
   border-style: solid;
   border-color: inherit;
+  box-shadow: none;
   color: inherit;
 }
 

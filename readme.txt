@@ -10,7 +10,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 == Description ==
 Helpful shortcodes with clean design, also a companion plugin for all themes available at AyeLabs. Build with developers, performance and user experience in mind.
 
-### Features:
+## Features:
 * 20+ shortcodes
 * Highly optimised, all assets are loaded only on the page shortcode is used
 * Theme authors can take advantage of assets management to load assets directly in theme and exclude the assets from plugin
@@ -21,9 +21,8 @@ Helpful shortcodes with clean design, also a companion plugin for all themes ava
 * 100% responsive
 * Developed with love
 
-### Supported Shortcodes:
-= [column] =
-Add a column using Bootstrap style. Supports the following attributes:
+## Supported Shortcodes:
+**[column]** - Add a column using Bootstrap style. Supports the following attributes:
 * lg - Large display size
 * md - Medium display size      
 * sm - Small display size      
@@ -43,47 +42,43 @@ Add a column using Bootstrap style. Supports the following attributes:
 * pricing_table - Use this attribute to define a pricing table column, give it a name as value
 * pricing_highlighted - If this is the highlighted column from your table, add this empty attribute
 
-= [aye_tabs] =
-Creates tabbed content. Use it to wrap tabs created with [aye_tab]. Supports the following attributes:
+**[aye_tabs]** - Creates tabbed content. Use it to wrap tabs created with [aye_tab]. Supports the following attributes:
 * orientation - Choose the orientation of the tabs, possible options: "horizontal" and "vertical". Default is "horizontal"
 
-= [aye_tab] =
-Creates a tab content in [aye_tabs] shortcode. Supports the following attributes: 
+**[aye_tab]** - Creates a tab content in [aye_tabs] shortcode. Supports the following attributes: 
 * title - Tab title
 
 Example:
+
 	[aye_tabs]
 		[aye_tab title="About You"]Describe yourself[/aye_tab]
 		[aye_tab title="Your Requirements"]What are your requirements?[/aye_tab]
 	[/aye_tabs]
 
-= [aye_button] =
-Adds a custom button. Supports the following attributes:
+**[aye_button]** - Adds a custom button. Supports the following attributes:
 * url - URL the button should link to
 * label - Button label
 * target - Where to open the button URL. Basic target attribute values http://www.w3schools.com/TAGS/att_a_target.asp. Default value is empty, but if you add an external URL the _blank target will be added automatically.
 * id - Give an unique ID to the button
 * icon - Font Awesome icon id ( without fa- prefix )
 
-= [aye_cta] =
-Creates an Call to Action section. Use [aye_button] to add a button inside of the CTA section. Supports the following attributes:
+**[aye_cta]** - Creates an Call to Action section. Use [aye_button] to add a button inside of the CTA section. Supports the following attributes:
 * position - Content position. Supports: "left", "right", "center". Default is "left"
 * background - Background color. Default is "#007acc".
 * color - Color for: button border, text and button label. Default is "#fff".
 
 Example:
+
 	[aye_cta background="tomato"]
 		We have the best tomatoes!
 		[aye_button id="1" icon="shopping-cart" label="Buy now!"]
 	[/aye_cta]
 
-= [aye_pricing_title] =
-Add a header title inside of your pricing table column. Use this shortcode inside [aye_column]. Supports the following attributes:
+**[aye_pricing_title]** - Add a header title inside of your pricing table column. Use this shortcode inside [aye_column]. Supports the following attributes:
 * title - Pricing table title ( ex. package name )
 * price - The price displayed on your table without currency
 
-= [aye_pricing_row] =
-Add a feature row inside of your pricing table column. Use this shortcode inside [aye_column]. Supports the following attributes:
+**[aye_pricing_row]** - Add a feature row inside of your pricing table column. Use this shortcode inside [aye_column]. Supports the following attributes:
 * content - A feature that table offers
 * icon - Font Awesome icon id ( without fa- prefix )
 
@@ -102,8 +97,7 @@ Pricing table example with two packages:
 	[/aye_column]
 *Add the shortcodes without spacing between them to avoid p tag wrapping.
 
-= [aye_progress_bar] =
-Create a simple progress bar. Supports the following attributes:
+**[aye_progress_bar]** - Create a simple progress bar. Supports the following attributes:
 * percent - Percent the bar should load. From 0 to 100
 * label - Text label that will be displayed insinde of the loading bar
 * icon - Font Awesome icon id. The icon will be displayed before label, insinde of the loading bar

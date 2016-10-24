@@ -124,8 +124,8 @@ class Core {
 	}
 
 	function activationHook() {
-		
-	}
+
+	}	
 
 	function deactivationHook() {
 		

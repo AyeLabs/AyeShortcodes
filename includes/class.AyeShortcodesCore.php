@@ -19,12 +19,11 @@ class Core {
 	function __construct() {
 		$this->shortcodes = new Shortcodes();
 
-
 		// Plugin shortcodes
 		$this->shortcodes_details = array(
 				'basic' => array('column', 'tabs', 'tab', 'button', 'cta', 'accordion'),
 				'charts_and_tables' => array('pricing_title', 'pricing_row', 'progress_bar'),
-				'typography' => array('message_box', 'icon', 'dropcap', 'blockquote', 'label', 'lead_paragraph', 'tooltip', 'google_font', 'divider_headline'),
+				'typography' => array('message_box', 'icon', 'drop_capital', 'blockquote', 'label', 'lead_paragraph', 'tooltip', 'google_font', 'divider_headline'),
 				'interactive' => array('divider_gotop', 'before_after', 'counter')
 			);
 		add_action( 'init', array( $this, 'pluginInit') );

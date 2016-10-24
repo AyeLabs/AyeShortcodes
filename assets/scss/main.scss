@@ -50,7 +50,6 @@
 .aye_cta {
 	padding: 3%;
 	overflow: hidden;
-	background: #007acc;
 	width: 110%;
 	margin-left: -5%;
 	color: #fff;
@@ -87,7 +86,10 @@
 	}
 
 	.aye_button {
-		border: 2px solid #fff;
+		border-width: 2px;
+		border-style: solid;
+		border-color: inherit;
+		color: inherit;
 	}
 }
 

@@ -168,10 +168,12 @@ class Shortcodes {
 	 */
 	static function aye_cta($atts, $content = "") {
 		$args = shortcode_atts( array(
-	        "position"		=> 'left'
+	        "position"		=> 'left',
+	        "background"		=> '#007acc',
+	        "color"		=> '#fff',
 	    ), $atts );
 
-		return '<div class="aye_cta '. $args['position'] .'">'. do_shortcode($content) .'</div><!-- / .aye_cta -->';
+		return '<div class="aye_cta '. esc_attr($args['position']) .'" style="background-color: '. esc_attr($args['background']) .'; color: '. esc_attr($args['color']) .'; border-color: '. esc_attr($args['color']) .';">'. do_shortcode($content) .'</div><!-- / .aye_cta -->';
 	}
 
 	/**

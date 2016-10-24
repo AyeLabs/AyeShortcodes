@@ -29,6 +29,7 @@ define( 'PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
 require_once PLUGIN_PATH . 'includes/class.AyeShortcodesCore.php';
 require_once PLUGIN_PATH . 'includes/class.AyeShortcodes.Assets.php';
+require_once PLUGIN_PATH . 'includes/class.AyeShortcodes.Helpers.php';
 require_once PLUGIN_PATH . 'includes/class.AyeShortcodes.php';
 $aye_shortcodes = new \Aye\Shortcodes\Core();
 

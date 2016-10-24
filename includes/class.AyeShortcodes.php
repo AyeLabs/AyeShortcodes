@@ -8,7 +8,11 @@ class Shortcodes {
 	// Load assets Class
 	public $assets;
 
+	// Shortcodes helper functions
+	public $helpers;
+
 	public function __construct() {
+		$this->helpers = new Helpers();
 		$this->assets = new Assets();
 	}
 
@@ -291,13 +295,11 @@ class Shortcodes {
 	 */
 	static function aye_icon($atts) {
 		$args = shortcode_atts( array(
-	        "type"			 => '',
+	        "set"			 => 'fontawesome',
+	        "icon"			 => '',
 	    ), $atts );
 
-		// Require assets
-	    $this->assets->loadStyle('fontawesome');
-
-	    return '<i class="fa fa-'. esc_attr($args['type']) .'"></i>';
+		return $this->helpers->getIcon($args['set'], $args['icon']);
 	}
 
 	/**

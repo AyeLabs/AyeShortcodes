@@ -25,7 +25,7 @@ class Helpers {
 
 	    // Return formated markup
 	    if($set == 'fontawesome') {
-	    	return ($class ? 'fa fa-'. esc_attr($icon) : '<i class="fa fa-'. esc_attr($icon) .'"></i>');
+	    	return ($class ? 'fa fa-'. esc_attr($icon) : '<i aria-hidden="true" class="fa fa-'. esc_attr($icon) .'"></i>');
 	    }
 	}
 }

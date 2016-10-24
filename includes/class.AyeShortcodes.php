@@ -330,16 +330,19 @@ class Shortcodes {
 		$args = shortcode_atts( array(
 	        "position"			 => 'left',
 	        "columns"			 => 'col-md-4',
-	        "author"			 => ''
+	        "author"			 => '',
+	        'style'			     => 'default'
 	    ), $atts );
 
-		$return = '<div class="aye_blockquote '. esc_attr($args['columns']) .' col-lg-12 col-sm-12 col-xs-12" style="float: '. esc_attr($args['position']) .';">' . $content;
+		if('default' == $args['style']) {
+			$return = '<div class="aye_blockquote '. esc_attr($args['columns']) .' col-lg-12 col-sm-12 col-xs-12" style="float: '. esc_attr($args['position']) .';">' . $content;
 
-		if(!empty($args['author'])) {
-			$return .= '<span class="author">'. $args['author'] .'</span>';
+			if(!empty($args['author'])) {
+				$return .= '<span class="author">'. $args['author'] .'</span>';
+			}
+
+			$return .= '</div>';
 		}
-
-		$return .= '</div>';
 
 		return $return;
 	}

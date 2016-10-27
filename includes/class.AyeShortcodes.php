@@ -4,6 +4,7 @@ namespace Aye\Shortcodes;
 
 class Shortcodes {
 	private $tab_titles = array();
+	private $tabs = array();
 
 	// Load assets Class
 	public $assets;
@@ -71,10 +72,15 @@ class Shortcodes {
 	 */
 	static function aye_tabs($atts, $content = '') {
 		$args = shortcode_atts( array(
-	        "orientation"          => 'horizontal'
+	        "orientation"	=> 'horizontal',
+	        "id"			=> ''
 	    ), $atts );
 
-		$return = '<div class="row aye_tabs '.$args['orientation'].'">';
+	    if(!empty($args['id'])) {
+			$this->tab_titles[ $args['id'] ] = array();
+		}
+
+		$return = '<div '. ( !empty($args['id']) ? 'id="' . $args['id'] . '" ' : '' ) .'class="row aye_tabs '. $args['orientation'] .'">';
 
 		// Start tabs
 	    if($args['orientation'] == 'horizontal') {
@@ -85,8 +91,14 @@ class Shortcodes {
 
 	    $tab_content = do_shortcode(wp_strip_all_tags($content));
 
-	    foreach($this->tab_titles as $key => $title) {
-	    	$return .= '<div class="tab'.($key == 0 ? ' active' : '').'" data-tab="'. esc_attr($key) .'">'. esc_html($title) .'</div>';
+	    if(!empty($args['id'])) {	
+		    foreach($this->tab_titles[$args['id']] as $key => $title) {
+		    	$return .= '<div '. ( !empty($args['id']) ? 'data-id="' . $args['id'] . '" ' : '' ) .'class="tab'.($key == 0 ? ' active' : '').'" data-tab="'. esc_attr($key) .'">'. esc_html($title) .'</div>';
+		    }
+	    } else {
+	    	foreach($this->tab_titles as $key => $title) {
+		    	$return .= '<div class="tab'.($key == 0 ? ' active' : '').'" data-tab="'. esc_attr($key) .'">'. esc_html($title) .'</div>';
+		    }
 	    }
 
 	    // End tabs
@@ -110,12 +122,17 @@ class Shortcodes {
 	 */
 	static function aye_tab($atts, $content = "") {
 		$args = shortcode_atts( array(
-	        "title"          => ''
+	        "title"          => '',
+	        "id"          => ''
 	    ), $atts );
 
 	    $title = $args['title'];
-		if(!empty($args['title']) and !in_array($args['title'], $this->tab_titles)) {
-	    	$count = array_push($this->tab_titles, $title);
+		if( !empty($args['title']) and !in_array($args['title'], $this->tab_titles) ) {
+			if(!empty($args['id'])) {
+	    		$count = array_push($this->tab_titles[$args['id']], $title);
+			} else {
+	    		$count = array_push($this->tab_titles[$args['id']], $title);
+			}
 		}
 
 		return '<div class="tab_content" style="display: '. (($count - 1) == 0 ? 'block' : 'none') .';" data-tabcontent="'. ($count - 1) .'">'. do_shortcode($content) .'</div>';
@@ -126,8 +143,6 @@ class Shortcodes {
 	 * Generates a button. 
 	 * Target attribute is mark automatcally as _blank is the url is external. 
 	 * You can also specify a post ID and his permalink will be used.
-	 *
-	 * @since 'postid' attribute - Link a post to the button
 	 */
 	static function aye_button($atts) {
 		$args = shortcode_atts( array(

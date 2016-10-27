@@ -126,6 +126,8 @@ class Shortcodes {
 	 * Generates a button. 
 	 * Target attribute is mark automatcally as _blank is the url is external. 
 	 * You can also specify a post ID and his permalink will be used.
+	 *
+	 * @since 'postid' attribute - Link a post to the button
 	 */
 	static function aye_button($atts) {
 		$args = shortcode_atts( array(
@@ -133,8 +135,9 @@ class Shortcodes {
 	        "label"        => '',
 	        "target"       => '',
 	        "id"           => '',
+	        "postid"       => '',
 	        "icon"         => '',
-	        "set"         => 'fontawesome'
+	        "set"          => 'fontawesome'
 	    ), $atts );
 
 	    // Require icon
@@ -144,8 +147,8 @@ class Shortcodes {
 
 	    // Get permalink if id it's used
 	    $permalink = $args['url'];
-	    if(!empty($args['id'])) {
-	    	$permalink = get_permalink($args['id']);
+	    if(!empty($args['postid'])) {
+	    	$permalink = get_permalink($args['postid']);
 	    }
 
 	    // Build target
@@ -160,7 +163,10 @@ class Shortcodes {
     		$target = '';
     	}
 
-    	return '<a class="aye_button" '. (empty($target) ? '' : 'target="'. esc_attr($target) .'"').' href="'. esc_url($permalink) .'">'. (isset($icon) ? $icon : '') .' '. $args['label'] .'</a>';
+    	return '<a 
+    			'. ( !empty($args['id']) ? 'id="' . $args['id'] . '" ' : '') .'class="aye_button" 
+    			'. (empty($target) ? '' : 'target="'. esc_attr($target) .'"').' href="'. esc_url($permalink) .'">
+    			'. (isset($icon) ? $icon : '') .' '. $args['label'] .'</a>';
 	}
 
 	/**

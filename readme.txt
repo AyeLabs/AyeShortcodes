@@ -60,6 +60,7 @@ Example:
 * label - Button label
 * target - Where to open the button URL. Basic target attribute values http://www.w3schools.com/TAGS/att_a_target.asp. Default value is empty, but if you add an external URL the _blank target will be added automatically.
 * id - Give an unique ID to the button
+* postid - Link a post to the button ( 'url' attribute will be overwritten )
 * icon - Font Awesome icon id ( without fa- prefix )
 
 **[aye_cta]** - Creates an Call to Action section. Use [aye_button] to add a button inside of the CTA section. Supports the following attributes:

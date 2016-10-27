@@ -38,7 +38,6 @@ class Shortcodes {
             "offset_sm"   => '',
             "offset_xs"   => '',
             "pricing_table"   => '',
-            "pricing_highlighted"   => '',
 	    ), $atts );
 
 	    // Require assets
@@ -62,7 +61,7 @@ class Shortcodes {
 		$class .= ( $args['offset_sm'] || $args['offset_sm'] === "0" ) ? ' col-sm-offset-'. $args['offset_sm'] : '';
 		$class .= ( $args['offset_xs'] || $args['offset_xs'] === "0" ) ? ' col-xs-offset-'. $args['offset_xs'] : '';
 		$class .= ( $args['pricing_table'] || $args['pricing_table'] === "0" ) ? ' aye_pricing_table '. $args['pricing_table'] : '';
-		$class .= ( $args['pricing_highlighted'] || $args['pricing_highlighted'] === "0" ) ? ' aye_pricing_highlighted' : '';
+		$class .= ( array_key_exists('pricing_highlighted', $atts) ) ? ' aye_pricing_highlighted' : '';
 
 		return '<div class="'. esc_attr($class) .'">'. do_shortcode($content) .'</div>';
 	}

@@ -300,9 +300,10 @@ class Shortcodes {
 	/**
 	 * Generates a drop capital
 	 */
-	static function aye_drop_capital($atts, $content = "") {
+	static function aye_drop_capital($atts) {
 		$args = shortcode_atts( array(
 	        "color"			 => '',
+	        "letter"			 => '',
 	        "font"			 => ''
 	    ), $atts );
 
@@ -320,7 +321,9 @@ class Shortcodes {
 		    $style .= '" ';
 		}
 
-		return '<span'. $style .' class="aye_drop_capital">'. do_shortcode($content) .'</span>';
+		if(!empty($args['letter'])) {
+			return '<span'. $style .' class="aye_drop_capital">'. $args['letter'] .'</span>';
+		}
 	}
 
 	/**
@@ -369,7 +372,6 @@ class Shortcodes {
 	    	$class .= ' ' . $args['arrow'];
 	    }
 	    
-
 	    // Build Style
 	    $style = ' style="' . 
 	    	(!empty($args['color']) ? 'color: '. esc_attr($args['color']) .';' : '') . 

@@ -102,6 +102,63 @@ Pricing table example with two packages:
 * label - Text label that will be displayed insinde of the loading bar
 * icon - Font Awesome icon id. The icon will be displayed before label, insinde of the loading bar
 
+**[aye_message_box]** - Create a message/alert box, personalized or using predefined styles. Supports the following attributes:
+* type - Predefined type of the box: error, warning, info, success. Don't use this attribute if personalized box is created.
+* text - Text the box will display
+
+Customization attributes:
+* icon -  Add a icon at the begining of the box.
+* color - Text color
+* background - Background color
+
+**[aye_icon]** - Add an simple inline icon. Supports the following attributes:
+* icon - The Font awesome icon id, without -fa prefix.
+
+**[aye_drop_capital]** - Creates a drop capital letter. Supports the following attributes:
+* letter - The letter
+* color - The letter color
+* font - The font-family style
+
+**[aye_blockquote]** - Creates a blockquote. Supports the following attributes:
+* position - Choose between 'left' or 'right'. Default is 'left'.
+* columns - Choose the bootstrap columns classes. Default is 'col-md-4' ( width of four columns )
+* author - The quote author
+
+**[aye_label]** - Creates a minimal text label. Supports the following attributes:
+* icon - Add an icon on your label
+* background - Background color
+* label - Label text
+* arrow - Your label can have a small arrow on the sides, pointing at something. Choose the arrow direction from: left, right, bottom and top
+* color - Text color
+
+**[aye_accordion]** - Creates an accordion slider. Supports the following attributes:
+* title - Title of the box
+* active - Add this attribute without a value to open the box by default
+
+**[aye_divider_gotop]** - Creates an simple border divider with Back to top link. Supports the following attributes:
+* border_color - The divider border color
+* border_height - The divider border height
+* color - 'Back to top' text color
+* margin - The top and bottom margins
+
+**[aye_lead_paragraph]** - Transform your paragraph into a lead paragraph [wikipedia](https://en.wikipedia.org/wiki/Lead_paragraph) . Doesn't support any attributes. 
+
+**[aye_tooltip]** - Adds an simple tooltip to your content. Supports the following attributes:
+* text - Tooltip text
+
+**[aye_google_font]** - Wrap your content with a Google Font. Don't worry, the font will be loaded only on the pages this shortcode is used. Supports the following attributes:
+* font - Google Font name ( valid example: 'Open Sans' invalid example: 'Open+Sans' )
+* weight - The font weight, ex: 400. For italic style add your desired font weight followed by 'i', example for normal italic: 400i
+
+**[aye_before_after]** - Creates an before and after image slider. Supports the following attributes:
+* before - Before image URL
+* after - After image URL
+
+**[aye_counter]** - Creates a number counter. The counter starts when your page loads. Supports the following attributes:
+* from - The number to start counting from
+* to - The number to stop counting at
+* speed - The number of milliseconds it should take to finish counting
+* refresh - The number of milliseconds to wait between refreshing the counter
 
 == Installation ==
 ### Manual Installation

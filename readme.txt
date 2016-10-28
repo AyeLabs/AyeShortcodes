@@ -199,6 +199,12 @@ Updates will be provided through the WordPress updater.
 
 == Frequently Asked Questions ==
 
+### What is a shortcode?
+A shortcode is a WordPress-specific code that lets you do nifty things with very little effort. Shortcodes can embed files or create objects that would normally require lots of complicated, ugly code in just one line. [source](https://en.support.wordpress.com/shortcodes/)
+
+### How do i use a shortcode?
+Simply add the shortcode id between squere brakets and place it in your post content. [shortcode_id]. If the shortcode supports attributes add them using the following sintax [shortcode_id attribute="attribute with value" attribute_without_value]. If your shortcode needs to alter your content, simply wrap the content with the shortcode. [shortcode_id]Your content[/shortcode_id]
+
 ### How can i integrate AyeShortcodes with your theme?
 
 AyeShortcodes it's a plugin developed with flexibility in mind. Besides the basic shortcode manager, it comes with a small assets dependecy manager that will allow you, as a developer, to manage the assets loaded on the website ( both from plugin and theme ). This will optimize the page and avoid loading it with unused/duplicate assets. The following code will help you setup your theme to be compatible with this plugin, follow the code comments

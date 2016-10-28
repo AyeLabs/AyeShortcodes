@@ -27,7 +27,7 @@ along with AyeShortcodes.
 define( 'PLUGIN_URL',  plugin_dir_url( __FILE__ ) );
 define( 'PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
-require_once PLUGIN_PATH . 'includes/class.AyeShortcodesCore.php';
+require_once PLUGIN_PATH . 'includes/class.AyeShortcodes.Core.php';
 require_once PLUGIN_PATH . 'includes/class.AyeShortcodes.Assets.php';
 require_once PLUGIN_PATH . 'includes/class.AyeShortcodes.Helpers.php';
 require_once PLUGIN_PATH . 'includes/class.AyeShortcodes.php';

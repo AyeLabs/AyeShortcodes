@@ -42,11 +42,17 @@ Helpful shortcodes with clean design, also a companion plugin for all themes ava
 * pricing_table - Use this attribute to define a pricing table column, give it a name as value
 * pricing_highlighted - If this is the highlighted column from your table, add this empty attribute
 
+** Wrap the content inside of this shortcode **
+
 **[aye_tabs]** - Creates tabbed content. Use it to wrap tabs created with [aye_tab]. Supports the following attributes:
 * orientation - Choose the orientation of the tabs, possible options: "horizontal" and "vertical". Default is "horizontal"
 
+** Wrap the content and [aye_tab] shortcodes inside of this shortcode **
+
 **[aye_tab]** - Creates a tab content in [aye_tabs] shortcode. Supports the following attributes: 
 * title - Tab title
+
+** Wrap the content inside of this shortcode **
 
 Example:
 
@@ -67,6 +73,8 @@ Example:
 * position - Content position. Supports: "left", "right", "center". Default is "left"
 * background - Background color. Default is "#007acc".
 * color - Color for: button border, text and button label. Default is "#fff".
+
+** Wrap the content inside of this shortcode **
 
 Example:
 
@@ -125,6 +133,8 @@ Customization attributes:
 * columns - Choose the bootstrap columns classes. Default is 'col-md-4' ( width of four columns )
 * author - The quote author
 
+** Wrap the content inside of this shortcode **
+
 **[aye_label]** - Creates a minimal text label. Supports the following attributes:
 * icon - Add an icon on your label
 * background - Background color
@@ -136,20 +146,35 @@ Customization attributes:
 * title - Title of the box
 * active - Add this attribute without a value to open the box by default
 
+** Wrap the content inside of this shortcode **
+
 **[aye_divider_gotop]** - Creates an simple border divider with Back to top link. Supports the following attributes:
 * border_color - The divider border color
 * border_height - The divider border height
 * color - 'Back to top' text color
 * margin - The top and bottom margins
 
+**[aye_divider_headline]** - Creates a styled divider headline. Supports the following attributes:
+* border_color - The two borders color
+* color - Text color
+* background_color - Divider background color
+
+** Wrap the content inside of this shortcode **
+
 **[aye_lead_paragraph]** - Transform your paragraph into a lead paragraph [wikipedia](https://en.wikipedia.org/wiki/Lead_paragraph) . Doesn't support any attributes. 
+
+** Wrap the content inside of this shortcode **
 
 **[aye_tooltip]** - Adds an simple tooltip to your content. Supports the following attributes:
 * text - Tooltip text
 
+** Wrap the content inside of this shortcode **
+
 **[aye_google_font]** - Wrap your content with a Google Font. Don't worry, the font will be loaded only on the pages this shortcode is used. Supports the following attributes:
 * font - Google Font name ( valid example: 'Open Sans' invalid example: 'Open+Sans' )
 * weight - The font weight, ex: 400. For italic style add your desired font weight followed by 'i', example for normal italic: 400i
+
+** Wrap the content inside of this shortcode **
 
 **[aye_before_after]** - Creates an before and after image slider. Supports the following attributes:
 * before - Before image URL

@@ -378,7 +378,7 @@ class Shortcodes {
 	        "icon"			 => '',
 	        "set"			 => '',
 	        "background"	 => 'tomato',
-	        "label"	  		 => 'tomato',
+	        "text"	  		 => 'tomato',
 	        "arrow"	 		 => '',
 	        "color"			 => 'white'
 	    ), $atts );
@@ -406,7 +406,7 @@ class Shortcodes {
 	    	$return .= $this->helpers->getIcon($args['set'], $args['icon']);
 	    }
 
-	    $return .= esc_html($args['label']) .'</span>';
+	    $return .= esc_html($args['text']) .'</span>';
 
 	    return $return;
 	}

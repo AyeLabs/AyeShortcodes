@@ -128,7 +128,7 @@ Customization attributes:
 **[aye_label]** - Creates a minimal text label. Supports the following attributes:
 * icon - Add an icon on your label
 * background - Background color
-* label - Label text
+* text - Label text
 * arrow - Your label can have a small arrow on the sides, pointing at something. Choose the arrow direction from: left, right, bottom and top
 * color - Text color
 

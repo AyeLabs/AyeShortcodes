@@ -31,9 +31,12 @@ class Assets {
 	 * Register assets that later will be enqueued by each shortcode
 	 */
 	public function registerAssets() {
+
+		// Styles
 		wp_register_style( 'fontawesome', PLUGIN_URL . 'assets/libs/font-awesome/css/font-awesome.min.css', array('ayeshortcode'), '4.6.3' );
+		wp_register_style( 'bootstrap-columns', PLUGIN_URL . 'assets/css/bootstrap-columns.min.css', array('ayeshortcode') );
 
-
+		// Scripts
 		wp_register_script( 'countTo', PLUGIN_URL . 'assets/libs/jquery-countTo/jquery.countTo.js', array('jquery', 'ayeshortcode'), '1.0', true );
 		wp_register_script( 'ayeshortcode', PLUGIN_URL . 'assets/js/scripts.js', array('jquery') );
 

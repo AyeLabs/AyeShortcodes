@@ -55,6 +55,14 @@ module.exports = function(grunt) {
 
         },
 
+        uglify: {
+          my_target: {
+            files: {
+              'assets/js/scripts.min.js': ['assets/js/scripts.js']
+            }
+          }
+        },
+
         makepot: {
           target: {
               options: {
@@ -64,7 +72,7 @@ module.exports = function(grunt) {
                   include: [],                      // List of files or directories to include.
                   mainFile: '',                     // Main project file.
                   potComments: '',                  // The copyright at the beginning of the POT file.
-                  potFilename: 'rohas-lite.pot',                  // Name of the POT file.
+                  potFilename: 'ayeshortcodes.pot',                  // Name of the POT file.
                   potHeaders: {
                       poedit: true,                 // Includes common Poedit headers.
                       'x-poedit-keywordslist': true // Include a list of all possible gettext functions.
@@ -77,27 +85,27 @@ module.exports = function(grunt) {
           }
       },
 
-      concat_css: {
-        options: {
-          // Task-specific options go here. 
-        },
-        all: {
-          src: ["assets/css/concat/*.css"],
-          dest: "style.css"
-        },
-      },
+      // concat_css: {
+      //   options: {
+      //     // Task-specific options go here. 
+      //   },
+      //   all: {
+      //     src: ["assets/css/concat/*.css"],
+      //     dest: "style.css"
+      //   },
+      // },
 
-      lineending: {
-        dist: {
-          options: {
-            eol: 'crlf',
-            overwrite: true
-          },
-          files: {
-            '': ['style.css']
-          }
-        }
-      }
+      // lineending: {
+      //   dist: {
+      //     options: {
+      //       eol: 'crlf',
+      //       overwrite: true
+      //     },
+      //     files: {
+      //       '': ['style.css']
+      //     }
+      //   }
+      // }
 
 
     });

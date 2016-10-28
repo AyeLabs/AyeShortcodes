@@ -1,0 +1,2 @@
+<?php
+// Greetings traveler

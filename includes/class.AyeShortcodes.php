@@ -4,14 +4,22 @@ namespace Aye\Shortcodes;
 
 class Shortcodes {
 	private $tab_titles = array();
+	private $tabs = array();
 
-	// Load assets
+	// Load assets Class
 	public $assets;
 
+	// Shortcodes helper functions
+	public $helpers;
+
 	public function __construct() {
+		$this->helpers = new Helpers();
 		$this->assets = new Assets();
 	}
 
+	/**
+	 * Create column with content inside using Bootstrap column system
+	 */
 	static function aye_column($atts, $content = '') {
 		$args = shortcode_atts( array(
 	        "lg"          => '',
@@ -31,8 +39,10 @@ class Shortcodes {
             "offset_sm"   => '',
             "offset_xs"   => '',
             "pricing_table"   => '',
-            "pricing_highlighted"   => '',
 	    ), $atts );
+
+	    // Require assets
+	    $this->assets->loadStyle('bootstrap-columns');
 
 	    $class  = '';
 		$class .= ( $args['lg'] )                                      ? ' col-lg-'. $args['lg'] : '';
@@ -52,20 +62,25 @@ class Shortcodes {
 		$class .= ( $args['offset_sm'] || $args['offset_sm'] === "0" ) ? ' col-sm-offset-'. $args['offset_sm'] : '';
 		$class .= ( $args['offset_xs'] || $args['offset_xs'] === "0" ) ? ' col-xs-offset-'. $args['offset_xs'] : '';
 		$class .= ( $args['pricing_table'] || $args['pricing_table'] === "0" ) ? ' aye_pricing_table '. $args['pricing_table'] : '';
-		$class .= ( $args['pricing_highlighted'] || $args['pricing_highlighted'] === "0" ) ? ' aye_pricing_highlighted' : '';
+		$class .= ( array_key_exists('pricing_highlighted', $atts) ) ? ' aye_pricing_highlighted' : '';
 
-		return '<div class="'. $class .'">'. do_shortcode($content) .'</div>';
+		return '<div class="'. esc_attr($class) .'">'. do_shortcode($content) .'</div>';
 	}
 
+	/**
+	 * Creates content tabs wrapper, default size is splitted in 4/8 columns combintion.
+	 */
 	static function aye_tabs($atts, $content = '') {
-		// array_push(self::$assets, __FUNCTION__);
-		
-
 		$args = shortcode_atts( array(
-	        "orientation"          => 'horizontal'
+	        "orientation"	=> 'horizontal',
+	        "id"			=> ''
 	    ), $atts );
 
-		$return = '<div class="row aye_tabs '.$args['orientation'].'">';
+	    if(!empty($args['id'])) {
+			$this->tab_titles[ $args['id'] ] = array();
+		}
+
+		$return = '<div '. ( !empty($args['id']) ? 'id="' . $args['id'] . '" ' : '' ) .'class="row aye_tabs '. $args['orientation'] .'">';
 
 		// Start tabs
 	    if($args['orientation'] == 'horizontal') {
@@ -76,8 +91,14 @@ class Shortcodes {
 
 	    $tab_content = do_shortcode(wp_strip_all_tags($content));
 
-	    foreach($this->tab_titles as $key => $title) {
-	    	$return .= '<div class="tab'.($key == 0 ? ' active' : '').'" data-tab="'. esc_attr($key) .'">'. esc_html($title) .'</div>';
+	    if(!empty($args['id'])) {	
+		    foreach($this->tab_titles[$args['id']] as $key => $title) {
+		    	$return .= '<div '. ( !empty($args['id']) ? 'data-id="' . $args['id'] . '" ' : '' ) .'class="tab'.($key == 0 ? ' active' : '').'" data-tab="'. esc_attr($key) .'">'. esc_html($title) .'</div>';
+		    }
+	    } else {
+	    	foreach($this->tab_titles as $key => $title) {
+		    	$return .= '<div class="tab'.($key == 0 ? ' active' : '').'" data-tab="'. esc_attr($key) .'">'. esc_html($title) .'</div>';
+		    }
 	    }
 
 	    // End tabs
@@ -96,42 +117,53 @@ class Shortcodes {
 		return $return;
 	}
 
+	/**
+	 * Creates content tabs
+	 */
 	static function aye_tab($atts, $content = "") {
 		$args = shortcode_atts( array(
-	        "title"          => ''
+	        "title"          => '',
+	        "id"          => ''
 	    ), $atts );
 
 	    $title = $args['title'];
-		if(!empty($args['title']) and !in_array($args['title'], $this->tab_titles)) {
-	    	$count = array_push($this->tab_titles, $title);
+		if( !empty($args['title']) and !in_array($args['title'], $this->tab_titles) ) {
+			if(!empty($args['id'])) {
+	    		$count = array_push($this->tab_titles[$args['id']], $title);
+			} else {
+	    		$count = array_push($this->tab_titles[$args['id']], $title);
+			}
 		}
 
 		return '<div class="tab_content" style="display: '. (($count - 1) == 0 ? 'block' : 'none') .';" data-tabcontent="'. ($count - 1) .'">'. do_shortcode($content) .'</div>';
 
 	}
 
+	/**
+	 * Generates a button. 
+	 * Target attribute is mark automatcally as _blank is the url is external. 
+	 * You can also specify a post ID and his permalink will be used.
+	 */
 	static function aye_button($atts) {
 		$args = shortcode_atts( array(
 	        "url"          => '',
-	        "label"          => '',
-	        "target"          => '',
-	        "id"          => '',
-	        "icon"          => ''
+	        "label"        => '',
+	        "target"       => '',
+	        "id"           => '',
+	        "postid"       => '',
+	        "icon"         => '',
+	        "set"          => 'fontawesome'
 	    ), $atts );
 
-	    // Require scripts
-	    $this->assets->loadStyle('fontawesome');
-
-		// Build class
-	    $class = "aye_button";
+	    // Require icon
 	    if(!empty($args['icon'])) {
-	    	$class .= ' fa fa-' . $args['icon'];
-	    }
+	    	$icon = $this->helpers->getIcon($args['set'], $args['icon']);
+		}
 
 	    // Get permalink if id it's used
 	    $permalink = $args['url'];
-	    if(!empty($args['id'])) {
-	    	$permalink = get_permalink($args['id']);
+	    if(!empty($args['postid'])) {
+	    	$permalink = get_permalink($args['postid']);
 	    }
 
 	    // Build target
@@ -146,17 +178,29 @@ class Shortcodes {
     		$target = '';
     	}
 
-    	return '<a class="'. esc_attr($class) .'" '. (empty($target) ? '' : 'target="'. esc_attr($target) .'"').' href="' .esc_url($permalink) .'">'. $args['label'] .'</a>';
+    	return '<a 
+    			'. ( !empty($args['id']) ? 'id="' . $args['id'] . '" ' : '') .'class="aye_button" 
+    			'. (empty($target) ? '' : 'target="'. esc_attr($target) .'"').' href="'. esc_url($permalink) .'">
+    			'. (isset($icon) ? $icon : '') .' '. $args['label'] .'</a>';
 	}
 
+	/**
+	 * Generates a call to action row
+	 */
 	static function aye_cta($atts, $content = "") {
 		$args = shortcode_atts( array(
-	        "position"		=> 'left'
+	        "position"		=> 'left',
+	        "background"		=> '#007acc',
+	        "color"		=> '#fff',
 	    ), $atts );
 
-		return '<div class="aye_cta '. $args['position'] .'">'. do_shortcode($content) .'</div><!-- / .aye_cta -->';
+		return '<div class="aye_cta '. esc_attr($args['position']) .'" style="background-color: '. esc_attr($args['background']) .'; color: '. esc_attr($args['color']) .'; border-color: '. esc_attr($args['color']) .';">'. do_shortcode($content) .'</div><!-- / .aye_cta -->';
 	}
 
+	/**
+	 * Generates a pricing table title, containing the title and the price. 
+	 * Should be used inside [aye_column]
+	 */
 	static function aye_pricing_title($atts) {
 		$args = shortcode_atts( array(
 	        "title"          => '',
@@ -166,34 +210,41 @@ class Shortcodes {
 	    return '<div class="aye_pricing_title"><span class="title">'. $args['title'] .'</span><span class="price">'. $args['price'] .'</span></div><!-- / .aye_pricing_title -->';
 	}
 
+	/**
+	 * Generates a pricing row, like a feature the current package offers.
+	 * Should be used inside [aye_column]
+	 */
 	static function aye_pricing_row($atts) {
 		$args = shortcode_atts( array(
-	        "content"          => '',
-	        "icon"			 => ''
+	        "content"        => '',
+	        "icon"			 => '',
+	        'set'			 => 'fontawesome'
 	    ), $atts );
 
-	    // Require scripts
-	    $this->assets->loadStyle('fontawesome');
+	    // Require Icon
+	    if(!empty($args['icon'])) {
+	    	$icon = $this->helpers->getIcon($args['set'], $args['icon']);
+		}
 
-	    $class = "aye_pricing_row";
-
-		return '<div class="aye_pricing_row">'. (( $args['icon'] || $args['icon'] === "0" ) ? '<i class="fa fa-'. $args['icon'] . '"></i>' : '') . ' '  . $args['content'] .'</div>';
+		return '<div class="aye_pricing_row">'. (isset($icon) ? $icon : '') .' '. $args['content'] .'</div>';
 	}
 
+	/**
+	 * Generates a progress bar, you cana also add an icon and a label.
+	 */
 	static function aye_progress_bar($atts) {
 		$args = shortcode_atts( array(
-	        "percent"          => 0,
+	        "percent"        => 0,
 	        "icon"			 => '',
+	        "set"			 => 'fontawesome',
 	        "label"			 => ''
 	    ), $atts );
 
-		// Require scripts
-	    $this->assets->loadStyle('fontawesome');
-
 		$return = '<div class="aye_progress_bar"><div class="loading" style="width: '. esc_attr($args['percent']) .'%;"></div><!-- / .loading -->';
 
+		// Require Icon
 		if(!empty($args['icon'])) {
-			$return .= '<i class="fa fa-'. esc_attr($args['icon']) .'"></i>';
+			$return .= $this->helpers->getIcon($args['set'], $args['icon']);
 		}
 
 		if(!empty($args['label'])) {
@@ -205,20 +256,22 @@ class Shortcodes {
 		return $return;
 	}
 
+	/**
+	 * Generates an alert message box. 
+	 * Four situation are already hardcoded: error, warning, info, success
+	 */
 	static function aye_message_box($atts) {
 		$args = shortcode_atts( array(
 	        "type"			 => '',
 	        "text"			 => '',
 	        "icon"			 => '',
+	        "set"			 => 'fontawesome',
 	        "color"			 => '',
 	        "background"	 => ''
 	    ), $atts );
-	    
-	    // Require scripts
-	    $this->assets->loadStyle('fontawesome');
 
     	// Set defaults
-	    $icon = ( $args['icon'] ) ? $args['icon'] : '';
+	    $icon = ( $args['icon'] ) ? $this->helpers->getIcon($args['set'], $args['icon']) : '';
 	    $background = ( $args['background'] ) ? $args['background'] : '#DDD';
 	    $color = ( $args['color'] ) ? $args['color'] : '';
 
@@ -226,25 +279,25 @@ class Shortcodes {
     	if("error" == $args['type']) {
     		$background = '#FF6347';
     		$color = '#FFF';
-    		$icon = 'ban';
+    		$icon = $this->helpers->getIcon($args['set'], 'ban');
     	} elseif("warning" == $args['type']) {
     		$background = '#FF8E47';
     		$color = '#FFF';
-    		$icon = 'exclamation-triangle';
+    		$icon = $this->helpers->getIcon($args['set'], 'exclamation-triangle');
     	} elseif("info" == $args['type']) {
     		$background = '#007acc';
     		$color = '#FFF';
-    		$icon = 'info-circle';
+    		$icon = $this->helpers->getIcon($args['set'], 'info-circle');
     	} elseif("success" == $args['type']) {
     		$background = '#1CFF8B';
     		$color = '#FFF';
-    		$icon = 'check';
+    		$icon = $this->helpers->getIcon($args['set'], 'check');
     	}
 
     	$return = '<div class="aye_message_box '. $args['type'] .'" style="color: '. esc_attr($color) .'; background-color: '. esc_attr($background) .';">';
 
-    	if(!empty($icon)) {
-    		$return .= '<i class="fa fa-'. esc_attr($icon) .'"></i> ';
+    	if(!empty($args['icon'])) {
+    		$return .= $icon;
     	}
 
     	$return .= $args['text'] . '</div>';
@@ -252,20 +305,25 @@ class Shortcodes {
     	return $return;
 	}
 
+	/**
+	 * Creates a simple inline font-awesome icon
+	 */
 	static function aye_icon($atts) {
 		$args = shortcode_atts( array(
-	        "type"			 => '',
+	        "set"			 => 'fontawesome',
+	        "icon"			 => '',
 	    ), $atts );
 
-		// Require scripts
-	    $this->assets->loadStyle('fontawesome');
-
-	    return '<i class="fa fa-'. esc_attr($args['type']) .'"></i>';
+		return $this->helpers->getIcon($args['set'], $args['icon']);
 	}
 
-	static function aye_dropcap($atts, $content = "") {
+	/**
+	 * Generates a drop capital
+	 */
+	static function aye_drop_capital($atts) {
 		$args = shortcode_atts( array(
 	        "color"			 => '',
+	        "letter"			 => '',
 	        "font"			 => ''
 	    ), $atts );
 
@@ -283,37 +341,49 @@ class Shortcodes {
 		    $style .= '" ';
 		}
 
-		return '<span'. $style .' class="aye_dropcap">'. do_shortcode($content) .'</span>';
+		if(!empty($args['letter'])) {
+			return '<span'. $style .' class="aye_drop_capital">'. $args['letter'] .'</span>';
+		}
 	}
 
+	/**
+	 * Generates a blockquote text with special design
+	 */
 	static function aye_blockquote($atts, $content = "") {
 		$args = shortcode_atts( array(
 	        "position"			 => 'left',
 	        "columns"			 => 'col-md-4',
-	        "author"			 => ''
+	        "author"			 => '',
+	        'style'			     => 'default'
 	    ), $atts );
 
-		$return = '<div class="aye_blockquote '. esc_attr($args['columns']) .' col-lg-12 col-sm-12 col-xs-12" style="float: '. esc_attr($args['position']) .';">' . $content;
+		if('default' == $args['style']) {
+			$return = '<div class="aye_blockquote '. esc_attr($args['columns']) .' col-lg-12 col-sm-12 col-xs-12" style="float: '. esc_attr($args['position']) .';">' . $content;
 
-		if(!empty($args['author'])) {
-			$return .= '<span class="author">'. $args['author'] .'</span>';
+			if(!empty($args['author'])) {
+				$return .= '<span class="author">'. $args['author'] .'</span>';
+			}
+
+			$return .= '</div>';
 		}
-
-		$return .= '</div>';
 
 		return $return;
 	}
 
+	/**
+	 * Generates a text label with custom icon, background color, text color or an arrow available on all sides.
+	 */
 	static function aye_label($atts) {
 		$args = shortcode_atts( array(
 	        "icon"			 => '',
+	        "set"			 => '',
 	        "background"	 => 'tomato',
-	        "label"	 => 'tomato',
-	        "arrow"	 => '',
+	        "text"	  		 => 'tomato',
+	        "arrow"	 		 => '',
 	        "color"			 => 'white'
 	    ), $atts );
 
-		// Require scripts
+		// Require assets
 	    $this->assets->loadStyle('fontawesome');
 
 		// Build class
@@ -322,7 +392,6 @@ class Shortcodes {
 	    	$class .= ' ' . $args['arrow'];
 	    }
 	    
-
 	    // Build Style
 	    $style = ' style="' . 
 	    	(!empty($args['color']) ? 'color: '. esc_attr($args['color']) .';' : '') . 
@@ -334,34 +403,39 @@ class Shortcodes {
 
 	    // Add icon
 	    if(!empty($args['icon'])) {
-	    	$return .= '<i class="fa fa-' . $args['icon'] . '"></i> ';
+	    	$return .= $this->helpers->getIcon($args['set'], $args['icon']);
 	    }
 
-	    $return .= esc_html($args['label']) .'</span>';
+	    $return .= esc_html($args['text']) .'</span>';
 
 	    return $return;
 	}
 
+	/**
+	 * Creates an accordion content slider
+	 */
 	static function aye_accordion($atts, $content = "") {
 		$args = shortcode_atts( array(
-	        "title"			 => '',
-	        "active"		 => ''
+	        "title"			 => ''
 	    ), $atts );
 
 	    if(!empty($args['title'])) {
 	    	return '<div class="aye_accordion">
-	    		<div class="aye_accordion_title'. (!empty($args['active']) ? ' active' : '') .'">'. $args['title'] .'</div><!-- / .aye_accordion_title -->
-	    		<div class="aye_accordion_content"'. (!empty($args['active']) ? ' style="display: block;"' : '') .'>'. do_shortcode($content) .'</div><!-- / .aye_accordion_content -->
+	    		<div class="aye_accordion_title'. (array_key_exists('active', $atts) ? ' active' : '') .'">'. $args['title'] .'</div><!-- / .aye_accordion_title -->
+	    		<div class="aye_accordion_content"'. (array_key_exists('active', $atts) ? ' style="display: block;"' : '') .'>'. do_shortcode($content) .'</div><!-- / .aye_accordion_content -->
 	    	</div><!-- / .aye_accordion -->';
 	    }
 	}
 	
+	/**
+	 * Creates a divider with a "Back to top" link
+	 */
 	static function aye_divider_gotop($atts) {
 		$args = shortcode_atts( array(
 	        "border_color"			 => '',
 	        "border_height"			 => '',
 	        "color"					 => '',
-	        "margin"		 => ''
+	        "margin"		 		 => ''
 	    ), $atts );
 
 	   	// Build style
@@ -374,11 +448,15 @@ class Shortcodes {
 		return '<div class="aye_divider_gotop"'. $style .'><span>&#8657; '. __('Back to top', 'ayeshort') .'</span></div><!-- / .aye_divider_gotop -->';
 	}
 
+	/**
+	 * Creates a special headline divider. Use inside of this shortcode an heading tag (h1-h6).
+	 * Margins will be defined by the heading style.
+	 */
 	static function aye_divider_headline($atts, $content = "") {
 		$args = shortcode_atts( array(
 	        "border_color"			 => '',
-	        "color"			 => '',
-	        "background_color"					 => ''
+	        "color"			    	 => '',
+	        "background_color"		 => ''
 	    ), $atts );
 
 	    // Build style
@@ -390,12 +468,18 @@ class Shortcodes {
 		return '<div class="aye_divider_headline"'. $style .'><span>'. do_shortcode($content) .'</span></div><!-- / .aye_divider_headline -->';
 	}
 
+	/**
+	 * Transforms a normal paragraph in a lead paragraph https://en.wikipedia.org/wiki/Lead_paragraph.
+	 */
 	static function aye_lead_paragraph($atts, $content = "") {
 		if(!empty($content)) {
 			return '<p class="aye_lead_paragraph">'.$content.'</p>';
 		}
 	}
 
+	/**
+	 * Creates a tooltip on selected element/content.
+	 */
 	static function aye_tooltip($atts, $content = "") {
 		$args = shortcode_atts( array(
 	        "text"			 => ''
@@ -408,6 +492,9 @@ class Shortcodes {
 		}
 	}
 
+	/**
+	 * Apply the specified font to the selected content. Font is loaded only on page where the shortcode is used.
+	 */
 	static function aye_google_font($atts, $content = "") {
 		$args = shortcode_atts( array(
 	        "font"			 => '',
@@ -431,6 +518,9 @@ class Shortcodes {
 		}
 	}
 
+	/**
+	 * Creates a before/after images slider.
+	 */
 	static function aye_before_after($atts) {
 		$args = shortcode_atts( array(
 	        "before"			 => '',
@@ -446,16 +536,19 @@ class Shortcodes {
 	    }
 	}
 
+	/**
+	 * Generates a number counter
+	 */
 	static function aye_counter($atts) {
 		$args = shortcode_atts( array(
 	        "from"			 => '0',
-	        "to"		 		 => '0',
-	        "speed"		 		 => '',
-	        "refresh"		 		 => ''
+	        "to"		 	 => '0',
+	        "speed"		     => '',
+	        "refresh"		 => ''
 	    ), $atts );
 
 		$this->assets->loadScript('countTo');
-		
+
 		return '<span class="aye_counter" data-from="'.$args['from'].'" data-to="'.$args['to'].'"
 		'. (!empty($args['speed']) ? 'data-speed="'. $args['speed'] .'"' : '') . '></span><!-- / .aye_counter -->';
 	}

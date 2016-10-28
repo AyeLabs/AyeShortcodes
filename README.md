@@ -186,3 +186,5 @@ First, be sure you manage the assets and declare compatibility with our plugin a
 - WordPress 3.x+
 
 ## Change Log
+= v0.1 =
+* Initial release
